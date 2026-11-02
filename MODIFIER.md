@@ -34,7 +34,7 @@ turquoise: "#73D9D0",  // turquoise : détails futuristes
 
 **Le décor et la lune :** le laboratoire est `public/images/station.webp` (sa baie vitrée est transparente, c'est là que passe la lune). La lune est `public/images/lune.webp`. Dans `site.ts`, le bloc `background` règle la position de la lune à chaque étape (`moonSteps`, en % : 100 = tout à droite, 0 = tout à gauche) et la durée du déplacement (`moonSeconds`).
 
-**Après la commande :** la planète (`public/images/planete.webp`) et le message se changent dans le bloc `thankYou` de `site.ts`.
+**Après la commande :** la planète apparaît dans la baie, le labo passe au jour, Orion (`public/images/orion-detoure.webp`) entre et tend sa fiole, puis la phrase apparaît en fondu. La planète, Orion et le message se changent dans le bloc `thankYou` de `site.ts`.
 
 **Les autres images :** dépose dans `public/images/` (Add file → Upload files) :
 - `labo.jpg` : section « Le rituel »
