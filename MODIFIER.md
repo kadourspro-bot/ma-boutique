@@ -23,16 +23,26 @@ Tu n'as besoin que de **deux fichiers**. Tu peux les modifier directement sur Gi
 name: "PureForme",   →   name: "MonNouveauNom",
 ```
 
-**Changer les couleurs** (choisis un code sur https://htmlcolorcodes.com/fr/) :
+**Changer les couleurs** (palette Lunaria, dans `site.ts`) :
 ```ts
-brand: "#39ff88",       // vert alien : boutons, lueurs, prix
-accent: "#22d3ee",      // cyan : liens, molécules du fond
-background: "#03060c",  // fond de l'espace
+night: "#11152B",      // bleu nuit : fond
+lilac: "#B7A1E8",      // lilas : boutons, accents
+silver: "#D7D8E2",     // argent : logo, lignes
+ivory: "#F7F3EE",      // ivoire : textes, cartes produits
+turquoise: "#73D9D0",  // turquoise : détails futuristes
 ```
 
-**Modifier le slider de l'accueil :** dans `site.ts`, la liste `slides` contient un bloc par slide (`tag`, `title`, `subtitle`, `image`, `button`). Copie un bloc pour en ajouter un, supprime-le pour l'enlever. `slideDuration` règle le temps entre deux slides (en secondes).
+**Ajouter les images d'Orion, du labo et de M.O.O.N. :** sur GitHub, ouvre le dossier `public/images/`, clique **Add file → Upload files** et dépose tes fichiers avec ces noms exacts :
+- `orion.jpg` : image principale de l'accueil et section « Univers »
+- `labo.jpg` : section « Le rituel »
+- `moon.jpg` : section newsletter
+- `laboratoire.mp4` : vidéo d'accueil en boucle (facultatif, sans son, moins de 8 Mo)
 
-**Régler le fond animé :** `molecules` = nombre de points (baisse-le si le site rame sur un vieux téléphone), `linkDistance` = distance à partir de laquelle les points se relient.
+Le site les affiche automatiquement. Tant qu'un fichier manque, une illustration le remplace.
+
+**Changer les textes de l'accueil :** blocs `hero`, `ritual`, `universe`, `newsletter` et `faq` dans `site.ts`.
+
+**Le logo :** les fichiers vectoriels sont dans `public/brand/` (version principale, claire, transparente et icône).
 
 **Changer un prix** (en centimes : 2490 = 24,90 €) :
 ```ts
@@ -47,7 +57,7 @@ price: 1990,   →   price: 2490,
 
 ## Règle importante pour les textes
 
-N'écris pas de promesse santé non autorisée (« fait maigrir », « soigne »…). Pour les compléments alimentaires, seules les allégations de la liste officielle de l'UE sont permises. Celle de la créatine en est une : « augmente la performance physique lors d'exercices brefs et intenses (3 g par jour) ».
+N'écris pas de promesse santé non autorisée (« fait maigrir », « soigne »…). Pour les compléments alimentaires, seules les allégations de la liste officielle de l'UE sont permises. Pour les cosmétiques, chaque bénéfice doit pouvoir être prouvé (tests). Pour Lunaria Balance, n'utilise que les allégations officielles du magnésium (ex. « contribue à réduire la fatigue »).
 
 ## Si quelque chose casse
 

@@ -1,0 +1,6 @@
+Dépose ici les visuels du site (mêmes noms exactement) :
+- orion.jpg        : image principale (Professeur Orion dans le labo, format large 16:9)
+- labo.jpg         : section « Le rituel » (fioles et botaniques sous cloche)
+- moon.jpg         : section newsletter (robot M.O.O.N.)
+- laboratoire.mp4  : vidéo d'accueil en boucle (facultatif, 8–12 s, sans son, moins de 8 Mo)
+Tant qu'un fichier est absent, le site affiche une illustration de remplacement.

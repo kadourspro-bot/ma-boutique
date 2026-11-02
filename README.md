@@ -1,4 +1,4 @@
-# PureForme (boutique en ligne)
+# Lunaria (boutique en ligne)
 
 Boutique en ligne en Next.js 15 + Tailwind CSS, pensée pour la conversion : panier latéral avec barre « livraison offerte », commande en une page sans compte, bouton d'achat fixe sur mobile, recherche et tri.
 

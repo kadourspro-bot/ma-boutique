@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 120" fill="none">
+  <rect width=420 height=120 fill=#11152B/>
+  <g transform="translate(14 22) scale(1.18)">
+    <path d="M38 8a24 24 0 1 0 18 34A20 20 0 1 1 38 8Z" fill="#D7D8E2"/>
+    <ellipse cx="32" cy="34" rx="29" ry="10" transform="rotate(-22 32 34)" stroke="#B7A1E8" stroke-width="2.6"/>
+    <path d="M51 15l1.6 4.4L57 21l-4.4 1.6L51 27l-1.6-4.4L45 21l4.4-1.6z" fill="#73D9D0"/>
+  </g>
+  <text x="110" y="66" font-family="Jost, Futura, 'Century Gothic', sans-serif" font-size="44" font-weight="400" letter-spacing="12" fill="#D7D8E2">LUNARIA</text>
+  <text x="112" y="94" font-family="Jost, Futura, 'Century Gothic', sans-serif" font-size="13" letter-spacing="3.5" fill="#D7D8E2" opacity=".75">VOTRE BEAUTÉ, NOUVELLE ORBITE</text>
+</svg>

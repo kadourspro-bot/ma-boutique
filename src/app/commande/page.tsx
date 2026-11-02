@@ -8,9 +8,9 @@ import { site } from "@/config/site";
 export default function Commande() {
   const { lines, subtotal, shipping, total, clear } = useCart();
   const [done, setDone] = useState(false);
-  if (done) return <div className="max-w-xl mx-auto px-4 py-20 text-center"><h1 className="font-display text-3xl font-bold title-gradient">Merci pour votre commande !</h1><p className="mt-3 text-white/60">Un e-mail de confirmation vous a été envoyé.</p></div>;
+  if (done) return <div className="max-w-xl mx-auto px-4 py-20 text-center"><h1 className="font-display text-4xl font-light title-gradient">Merci pour votre commande !</h1><p className="mt-3 text-white/60">Un e-mail de confirmation vous a été envoyé.</p></div>;
   if (lines.length === 0) return <div className="max-w-xl mx-auto px-4 py-20 text-center"><p>Votre panier est vide.</p></div>;
-  const field = "mt-1 w-full rounded-xl border border-white/15 bg-black/40 px-3 py-2.5 outline-none focus:border-brand focus:shadow-[0_0_0_3px_color-mix(in_srgb,var(--brand)_25%,transparent)]";
+  const field = "mt-1 w-full rounded-xl border border-silver/20 bg-night/60 px-3 py-2.5 outline-none focus:border-brand focus:shadow-[0_0_0_3px_color-mix(in_srgb,var(--lilac)_25%,transparent)]";
   return (
     <div className="max-w-5xl mx-auto px-4 py-10 grid gap-10 md:grid-cols-[1fr_360px]">
       <form onSubmit={(e) => { e.preventDefault(); clear(); setDone(true); }} className="glass rounded-3xl p-6 space-y-4">
@@ -29,7 +29,7 @@ export default function Commande() {
         <label className="block"><span className="text-sm font-medium">Téléphone (pour le transporteur)</span><input type="tel" autoComplete="tel" className={field} /></label>
         <fieldset className="space-y-2"><legend className="text-sm font-medium">Livraison</legend>
           {site.shippingOptions.map((o, i) => (
-            <label key={o} className="flex gap-2 border border-white/15 rounded-xl p-3 has-[:checked]:border-brand has-[:checked]:bg-brand/10 cursor-pointer accent-[var(--brand)]"><input type="radio" name="ship" defaultChecked={i === 0} /> {o}</label>
+            <label key={o} className="flex gap-2 border border-silver/20 rounded-xl p-3 has-[:checked]:border-brand has-[:checked]:bg-brand/10 cursor-pointer accent-[var(--lilac)]"><input type="radio" name="ship" defaultChecked={i === 0} /> {o}</label>
           ))}
         </fieldset>
         <label className="flex gap-2 text-sm"><input required type="checkbox" /> J&apos;accepte les CGV.</label>
@@ -43,7 +43,7 @@ export default function Commande() {
         <div className="flex justify-between text-sm"><span>Sous-total</span><span>{formatPrice(subtotal)}</span></div>
         <div className="flex justify-between text-sm"><span>Livraison</span><span>{shipping === 0 ? "Offerte" : formatPrice(shipping)}</span></div>
         <details className="text-sm"><summary className="cursor-pointer">Vous avez un code promo ?</summary><input className={`${field} mt-2`} placeholder="CODE" /></details>
-        <div className="flex justify-between font-display font-bold text-lg text-brand"><span>Total</span><span>{formatPrice(total)}</span></div>
+        <div className="flex justify-between font-display text-lg text-brand"><span>Total</span><span>{formatPrice(total)}</span></div>
       </aside>
     </div>
   );

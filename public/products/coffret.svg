@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400"><defs>
+<radialGradient id="halo" cx=".5" cy=".55" r=".5"><stop offset="0" stop-color="#D7D8E2" stop-opacity=".55"/><stop offset="1" stop-color="#D7D8E2" stop-opacity="0"/></radialGradient>
+<linearGradient id="ivory" x1="0" x2="1"><stop offset="0" stop-color="#e9e3da"/><stop offset=".35" stop-color="#fbf8f4"/><stop offset=".6" stop-color="#f3eee7"/><stop offset="1" stop-color="#d9d2c8"/></linearGradient>
+<linearGradient id="night" x1="0" x2="1"><stop offset="0" stop-color="#0b0e1f"/><stop offset=".4" stop-color="#232a4d"/><stop offset=".6" stop-color="#1a2040"/><stop offset="1" stop-color="#0a0d1c"/></linearGradient>
+<linearGradient id="chrome" x1="0" x2="1"><stop offset="0" stop-color="#8d90a3"/><stop offset=".45" stop-color="#f4f5fa"/><stop offset=".6" stop-color="#c9cbd8"/><stop offset="1" stop-color="#7d8094"/></linearGradient>
+</defs><ellipse cx="200" cy="350" rx="110" ry="12" fill="#11152B" opacity=".18"/><circle cx="200" cy="215" r="170" fill="url(#halo)"/>
+<rect x="70" y="150" width="260" height="200" rx="18" fill="url(#night)"/>
+<path d="M70 210h260" stroke="url(#chrome)" stroke-width="2"/>
+<ellipse cx="200" cy="280" rx="110" ry="30" fill="none" stroke="#B7A1E8" stroke-opacity=".6" transform="rotate(-8 200 280)"/>
+<g transform="translate(176 232) scale(0.75)"><path d="M38 8a24 24 0 1 0 18 34A20 20 0 1 1 38 8Z" fill="#D7D8E2"/><ellipse cx="32" cy="34" rx="29" ry="10" transform="rotate(-22 32 34)" stroke="#B7A1E8" stroke-width="2.6" fill="none"/><path d="M51 15l1.6 4.4L57 21l-4.4 1.6L51 27l-1.6-4.4L45 21l4.4-1.6z" fill="#73D9D0"/></g>
+<text x="200" y="330" text-anchor="middle" font-family="Jost,Futura,sans-serif" font-size="14" letter-spacing="6" fill="#D7D8E2">COFFRET ORBITE</text>
+<rect x="108" y="96" width="40" height="58" rx="10" fill="url(#ivory)"/><rect x="180" y="76" width="44" height="78" rx="12" fill="url(#night)" stroke="#D7D8E2" stroke-opacity=".4"/><rect x="256" y="104" width="38" height="50" rx="9" fill="url(#ivory)"/>
+<circle cx="128" cy="124" r="5" fill="#73D9D0"/><circle cx="202" cy="114" r="5" fill="#B7A1E8"/><circle cx="275" cy="128" r="5" fill="#E8C9A1"/>
+</svg>

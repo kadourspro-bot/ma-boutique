@@ -6,7 +6,7 @@ export default function Legal() {
   const c = site.company;
   return (
     <div className="max-w-3xl mx-auto px-4 py-10 space-y-6">
-      <h1 className="font-display text-3xl font-bold title-gradient">Mentions légales</h1>
+      <h1 className="font-display text-4xl font-light title-gradient">Mentions légales</h1>
       <ul className="space-y-1">
         <li><strong>Société :</strong> {c.legalName}</li>
         <li><strong>Adresse :</strong> {c.address}</li>
@@ -16,9 +16,9 @@ export default function Legal() {
         <li><strong>Contact :</strong> {site.contactEmail}</li>
         <li><strong>Hébergeur :</strong> {c.host}</li>
       </ul>
-      <h2 id="cgv" className="font-display text-xl font-bold text-brand">Conditions générales de vente</h2>
+      <h2 id="cgv" className="font-display text-xl font-normal text-brand">Conditions générales de vente</h2>
       <p>À rédiger : prix TTC, livraison, droit de rétractation de 14 jours, garanties légales, médiateur de la consommation.</p>
-      <h2 id="retours" className="font-display text-xl font-bold text-brand">Retours</h2>
+      <h2 id="retours" className="font-display text-xl font-normal text-brand">Retours</h2>
       <p>Vous disposez de 14 jours après réception pour nous retourner un produit non ouvert. Écrivez-nous à {site.contactEmail}.</p>
     </div>
   );
