@@ -8,14 +8,14 @@ import { site } from "@/config/site";
 export default function Commande() {
   const { lines, subtotal, shipping, total, clear } = useCart();
   const [done, setDone] = useState(false);
-  if (done) return <div className="max-w-xl mx-auto px-4 py-20 text-center"><h1 className="text-3xl font-bold">Merci pour votre commande !</h1><p className="mt-3 text-neutral-600">Un e-mail de confirmation vous a été envoyé.</p></div>;
+  if (done) return <div className="max-w-xl mx-auto px-4 py-20 text-center"><h1 className="font-display text-3xl font-bold title-gradient">Merci pour votre commande !</h1><p className="mt-3 text-white/60">Un e-mail de confirmation vous a été envoyé.</p></div>;
   if (lines.length === 0) return <div className="max-w-xl mx-auto px-4 py-20 text-center"><p>Votre panier est vide.</p></div>;
-  const field = "w-full rounded-lg border px-3 py-2.5";
+  const field = "mt-1 w-full rounded-xl border border-white/15 bg-black/40 px-3 py-2.5 outline-none focus:border-brand focus:shadow-[0_0_0_3px_color-mix(in_srgb,var(--brand)_25%,transparent)]";
   return (
     <div className="max-w-5xl mx-auto px-4 py-10 grid gap-10 md:grid-cols-[1fr_360px]">
-      <form onSubmit={(e) => { e.preventDefault(); clear(); setDone(true); }} className="space-y-4">
-        <h1 className="text-2xl font-bold">Finaliser la commande</h1>
-        <p className="text-sm text-neutral-600">Pas besoin de créer de compte.</p>
+      <form onSubmit={(e) => { e.preventDefault(); clear(); setDone(true); }} className="glass rounded-3xl p-6 space-y-4">
+        <h1 className="font-display text-2xl font-bold title-gradient">Finaliser la commande</h1>
+        <p className="text-sm text-white/60">Pas besoin de créer de compte.</p>
         <label className="block"><span className="text-sm font-medium">E-mail</span><input required type="email" autoComplete="email" className={field} /></label>
         <div className="grid grid-cols-2 gap-3">
           <label><span className="text-sm font-medium">Prénom</span><input required autoComplete="given-name" className={field} /></label>
@@ -29,21 +29,21 @@ export default function Commande() {
         <label className="block"><span className="text-sm font-medium">Téléphone (pour le transporteur)</span><input type="tel" autoComplete="tel" className={field} /></label>
         <fieldset className="space-y-2"><legend className="text-sm font-medium">Livraison</legend>
           {site.shippingOptions.map((o, i) => (
-            <label key={o} className="flex gap-2 border rounded-lg p-3"><input type="radio" name="ship" defaultChecked={i === 0} /> {o}</label>
+            <label key={o} className="flex gap-2 border border-white/15 rounded-xl p-3 has-[:checked]:border-brand has-[:checked]:bg-brand/10 cursor-pointer accent-[var(--brand)]"><input type="radio" name="ship" defaultChecked={i === 0} /> {o}</label>
           ))}
         </fieldset>
         <label className="flex gap-2 text-sm"><input required type="checkbox" /> J&apos;accepte les CGV.</label>
-        <button className="w-full rounded-full bg-brand hover:opacity-90 text-white font-semibold py-3">Payer {formatPrice(total)}</button>
-        <p className="text-xs text-center text-neutral-500">Démo : aucun paiement réel n&apos;est effectué.</p>
+        <button className="btn-neon w-full rounded-full py-3.5">Payer {formatPrice(total)}</button>
+        <p className="text-xs text-center text-white/60">Démo : aucun paiement réel n&apos;est effectué.</p>
       </form>
-      <aside className="rounded-2xl bg-neutral-50 p-5 h-fit space-y-3">
+      <aside className="glass rounded-3xl p-5 h-fit space-y-3 md:sticky md:top-32">
         <h2 className="font-semibold">Récapitulatif</h2>
         {lines.map((l) => { const p = getProduct(l.slug); return p && <div key={l.slug} className="flex justify-between text-sm"><span>{l.qty} × {p.name}</span><span>{formatPrice(p.price * l.qty)}</span></div>; })}
-        <hr />
+        <hr className="border-white/10" />
         <div className="flex justify-between text-sm"><span>Sous-total</span><span>{formatPrice(subtotal)}</span></div>
         <div className="flex justify-between text-sm"><span>Livraison</span><span>{shipping === 0 ? "Offerte" : formatPrice(shipping)}</span></div>
         <details className="text-sm"><summary className="cursor-pointer">Vous avez un code promo ?</summary><input className={`${field} mt-2`} placeholder="CODE" /></details>
-        <div className="flex justify-between font-bold text-lg"><span>Total</span><span>{formatPrice(total)}</span></div>
+        <div className="flex justify-between font-display font-bold text-lg text-brand"><span>Total</span><span>{formatPrice(total)}</span></div>
       </aside>
     </div>
   );

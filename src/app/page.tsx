@@ -1,42 +1,36 @@
 import Link from "next/link";
 import { products } from "@/lib/products";
 import ProductCard from "@/components/ProductCard";
+import HeroSlider from "@/components/HeroSlider";
 import { site } from "@/config/site";
 
 // Les textes de cette page se modifient dans src/config/site.ts
 export default function Home() {
   const best = products.filter((p) => p.bestseller);
-  const { hero } = site;
   return (
     <>
-      <section className="max-w-6xl mx-auto px-4 py-16 sm:py-24 grid gap-8 sm:grid-cols-2 items-center">
-        <div>
-          <h1 className="text-4xl sm:text-5xl font-bold tracking-tight">{hero.title}</h1>
-          <p className="mt-4 text-lg text-neutral-600">{hero.subtitle}</p>
-          <div className="mt-8 flex flex-wrap gap-3">
-            <Link href={hero.primaryButton.href} className="rounded-full bg-brand hover:opacity-90 text-white font-semibold px-6 py-3">{hero.primaryButton.label}</Link>
-            <Link href={hero.secondaryButton.href} className="rounded-full border border-neutral-300 px-6 py-3 font-semibold">{hero.secondaryButton.label}</Link>
-          </div>
-          <ul className="mt-8 flex flex-wrap gap-x-6 gap-y-2 text-sm text-neutral-700">
-            {site.reassurance.map((r) => <li key={r}>✓ {r}</li>)}
-          </ul>
-        </div>
-        <img src={hero.image} alt="" className="w-full aspect-square rounded-3xl bg-neutral-100" />
-      </section>
+      <HeroSlider />
 
-      <section className="max-w-6xl mx-auto px-4">
+      <section className="max-w-6xl mx-auto px-4 mt-20">
         <div className="flex items-end justify-between">
-          <h2 className="text-2xl font-bold">Meilleures ventes</h2>
-          <Link href="/boutique" className="text-sm underline">Tout voir</Link>
+          <div>
+            <p className="font-display text-xs tracking-[0.3em] uppercase text-accent">Échantillons stables</p>
+            <h2 className="mt-2 font-display text-2xl sm:text-3xl font-bold">Meilleures ventes</h2>
+          </div>
+          <Link href="/boutique" className="text-sm text-accent hover:underline">Tout voir →</Link>
         </div>
-        <div className="mt-6 grid gap-4 grid-cols-2 lg:grid-cols-3">{best.map((p) => <ProductCard key={p.slug} p={p} />)}</div>
+        <div className="mt-8 grid gap-4 grid-cols-2 lg:grid-cols-3">{best.map((p) => <ProductCard key={p.slug} p={p} />)}</div>
       </section>
 
-      <section id="faq" className="max-w-3xl mx-auto px-4 mt-20">
-        <h2 className="text-2xl font-bold">Questions fréquentes</h2>
-        <div className="mt-6 divide-y border rounded-2xl">
+      <section id="faq" className="max-w-3xl mx-auto px-4 mt-24 scroll-mt-28">
+        <p className="font-display text-xs tracking-[0.3em] uppercase text-accent text-center">Base de données</p>
+        <h2 className="mt-2 font-display text-2xl sm:text-3xl font-bold text-center">Questions fréquentes</h2>
+        <div className="glass mt-8 divide-y divide-white/10 rounded-3xl">
           {site.faq.map(([q, a]) => (
-            <details key={q} className="p-4"><summary className="font-medium cursor-pointer">{q}</summary><p className="mt-2 text-neutral-600">{a}</p></details>
+            <details key={q} className="group p-5">
+              <summary className="font-medium cursor-pointer list-none flex justify-between items-center gap-4">{q}<span className="text-brand transition-transform group-open:rotate-45 text-xl">+</span></summary>
+              <p className="mt-3 text-white/60">{a}</p>
+            </details>
           ))}
         </div>
       </section>

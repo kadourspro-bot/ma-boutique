@@ -23,10 +23,16 @@ Tu n'as besoin que de **deux fichiers**. Tu peux les modifier directement sur Gi
 name: "PureForme",   →   name: "MonNouveauNom",
 ```
 
-**Changer la couleur principale** (choisis un code sur https://htmlcolorcodes.com/fr/) :
+**Changer les couleurs** (choisis un code sur https://htmlcolorcodes.com/fr/) :
 ```ts
-brand: "#0f766e",   →   brand: "#dc2626",
+brand: "#39ff88",       // vert alien : boutons, lueurs, prix
+accent: "#22d3ee",      // cyan : liens, molécules du fond
+background: "#03060c",  // fond de l'espace
 ```
+
+**Modifier le slider de l'accueil :** dans `site.ts`, la liste `slides` contient un bloc par slide (`tag`, `title`, `subtitle`, `image`, `button`). Copie un bloc pour en ajouter un, supprime-le pour l'enlever. `slideDuration` règle le temps entre deux slides (en secondes).
+
+**Régler le fond animé :** `molecules` = nombre de points (baisse-le si le site rame sur un vieux téléphone), `linkDistance` = distance à partir de laquelle les points se relient.
 
 **Changer un prix** (en centimes : 2490 = 24,90 €) :
 ```ts

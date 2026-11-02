@@ -12,9 +12,42 @@ export const site = {
 
   // --- Couleurs (codes hexadécimaux, ex. #059669) ---
   colors: {
-    brand: "#0f766e", // boutons, badges, barre de progression
-    dark: "#171717", // bandeau du haut, bouton panier
+    brand: "#39ff88", // vert alien : boutons, lueurs, prix
+    accent: "#22d3ee", // cyan : liens, molécules du fond
+    background: "#03060c", // fond de l'espace
   },
+
+  // --- Fond animé (molécules qui se connectent) ---
+  background: {
+    molecules: 90, // nombre de points (moins = plus léger sur mobile)
+    linkDistance: 140, // distance max pour relier deux points
+  },
+
+  // --- Slider tout en haut de l'accueil (ajoute ou retire des slides) ---
+  slides: [
+    {
+      tag: "Protocole 01 · Pureté",
+      title: "Synthétisée au-delà des étoiles.",
+      subtitle: "Créatine monohydrate pure à 99,9 %, analysée en laboratoire, lot par lot.",
+      image: "/products/creatine.svg",
+      button: { label: "Explorer le labo", href: "/boutique" },
+    },
+    {
+      tag: "Protocole 02 · Puissance",
+      title: "3 g. Chaque jour. Rien d'autre.",
+      subtitle: "Augmente la performance physique lors d'exercices brefs et intenses.",
+      image: "/products/creatine.svg",
+      button: { label: "Voir la créatine 500 g", href: "/produit/creatine-500g" },
+    },
+    {
+      tag: "Protocole 03 · Offre",
+      title: "Le pack de l'année, shaker offert.",
+      subtitle: "Deux pots de 500 g, livraison offerte, expédiés sous 24 h.",
+      image: "/products/shaker.svg",
+      button: { label: "Prendre le pack", href: "/produit/pack-2x500g" },
+    },
+  ],
+  slideDuration: 6, // secondes entre deux slides
 
   // --- Bandeau tout en haut de chaque page ---
   announcement: "Livraison offerte dès 50 € · Expédition sous 24 h",
@@ -24,15 +57,7 @@ export const site = {
   shippingFee: 490,
   shippingOptions: ["Point relais (2–3 jours)", "Domicile (2 jours)"],
 
-  // --- Page d'accueil ---
-  hero: {
-    title: "La créatine la plus pure, au juste prix.",
-    subtitle: "100 % créatine monohydrate, sans arôme ni additif. Une dose de 3 g par jour suffit.",
-    image: "/products/creatine.svg",
-    primaryButton: { label: "Voir les produits", href: "/boutique" },
-    secondaryButton: { label: "Commencer par le pack", href: "/produit/pack-2x500g" },
-  },
-  // Petits arguments affichés sous le hero et sur chaque fiche produit
+  // Petits arguments affichés sous le slider et sur chaque fiche produit
   reassurance: ["Expédition 24 h", "Retours 14 jours", "Paiement sécurisé"],
 
   faq: [

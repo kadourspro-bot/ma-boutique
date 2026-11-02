@@ -24,20 +24,20 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
     <div className="max-w-6xl mx-auto px-4 py-10 pb-32 sm:pb-10">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <div className="grid gap-10 sm:grid-cols-2">
-        <img src={p.image} alt={p.name} className="w-full aspect-square rounded-3xl bg-neutral-100" />
+        <img src={p.image} alt={p.name} className="glass w-full aspect-square rounded-3xl object-contain p-10 drop-shadow-[0_0_40px_var(--brand)]" />
         <div>
-          <p className="text-sm text-neutral-500">{p.category}</p>
-          <h1 className="text-3xl font-bold mt-1">{p.name}</h1>
-          <p className="text-2xl font-semibold mt-3">{formatPrice(p.price)}</p>
-          <p className="mt-4 text-neutral-700">{p.description}</p>
-          <p className={`mt-4 text-sm ${p.stock > 0 ? "text-brand" : "text-red-600"}`}>
+          <p className="text-sm text-white/60">{p.category}</p>
+          <h1 className="font-display text-3xl sm:text-4xl font-bold mt-1 title-gradient">{p.name}</h1>
+          <p className="font-display text-3xl font-bold mt-3 text-brand text-glow">{formatPrice(p.price)}</p>
+          <p className="mt-4 text-white/60">{p.description}</p>
+          <p className={`mt-4 text-sm ${p.stock > 0 ? "text-brand" : "text-red-400"}`}>
             {p.stock > 0 ? `● En stock · expédié sous 24 h` : "● Épuisé"}
           </p>
           <AddToCart slug={p.slug} price={p.price} disabled={p.stock === 0} />
-          <ul className="mt-6 text-sm space-y-1 text-neutral-700">{site.reassurance.map((r) => <li key={r}>✓ {r}</li>)}</ul>
+          <ul className="mt-6 text-sm space-y-1 text-white/60">{site.reassurance.map((r) => <li key={r}>✓ {r}</li>)}</ul>
         </div>
       </div>
-      <h2 className="text-xl font-bold mt-16">Vous aimerez aussi</h2>
+      <h2 className="font-display text-xl font-bold mt-16">Vous aimerez aussi</h2>
       <div className="mt-4 grid gap-4 grid-cols-2 lg:grid-cols-3">{related.map((r) => <ProductCard key={r.slug} p={r} />)}</div>
     </div>
   );
