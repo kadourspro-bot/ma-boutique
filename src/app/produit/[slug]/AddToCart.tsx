@@ -7,7 +7,7 @@ export default function AddToCart({ slug, price, disabled }: { slug: string; pri
   const { add } = useCart();
   const [qty, setQty] = useState(1);
   const btn = (
-    <button disabled={disabled} onClick={() => add(slug, qty)} className="flex-1 rounded-full bg-emerald-600 hover:bg-emerald-700 disabled:bg-neutral-300 text-white font-semibold py-3 px-6">
+    <button disabled={disabled} onClick={() => add(slug, qty)} className="flex-1 rounded-full bg-brand hover:opacity-90 disabled:bg-neutral-300 text-white font-semibold py-3 px-6">
       {disabled ? "Épuisé" : `Ajouter au panier · ${formatPrice(price * qty)}`}
     </button>
   );

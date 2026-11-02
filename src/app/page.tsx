@@ -1,30 +1,27 @@
 import Link from "next/link";
 import { products } from "@/lib/products";
 import ProductCard from "@/components/ProductCard";
+import { site } from "@/config/site";
 
-const faq = [
-  ["Quels sont les délais de livraison ?", "Expédition sous 24 h ouvrées, livraison en 2 à 3 jours en France."],
-  ["Puis-je retourner un produit ?", "Oui, vous disposez de 14 jours après réception (droit de rétractation)."],
-  ["Le paiement est-il sécurisé ?", "Oui : carte bancaire, Apple Pay et Google Pay via un prestataire certifié PCI-DSS."],
-];
-
+// Les textes de cette page se modifient dans src/config/site.ts
 export default function Home() {
   const best = products.filter((p) => p.bestseller);
+  const { hero } = site;
   return (
     <>
       <section className="max-w-6xl mx-auto px-4 py-16 sm:py-24 grid gap-8 sm:grid-cols-2 items-center">
         <div>
-          <h1 className="text-4xl sm:text-5xl font-bold tracking-tight">Une promesse claire, en une phrase.</h1>
-          <p className="mt-4 text-lg text-neutral-600">Le bénéfice principal pour le client, sans jargon.</p>
+          <h1 className="text-4xl sm:text-5xl font-bold tracking-tight">{hero.title}</h1>
+          <p className="mt-4 text-lg text-neutral-600">{hero.subtitle}</p>
           <div className="mt-8 flex flex-wrap gap-3">
-            <Link href="/boutique" className="rounded-full bg-emerald-600 hover:bg-emerald-700 text-white font-semibold px-6 py-3">Voir les produits</Link>
-            <Link href="/produit/pack-decouverte" className="rounded-full border border-neutral-300 px-6 py-3 font-semibold">Commencer par le pack</Link>
+            <Link href={hero.primaryButton.href} className="rounded-full bg-brand hover:opacity-90 text-white font-semibold px-6 py-3">{hero.primaryButton.label}</Link>
+            <Link href={hero.secondaryButton.href} className="rounded-full border border-neutral-300 px-6 py-3 font-semibold">{hero.secondaryButton.label}</Link>
           </div>
           <ul className="mt-8 flex flex-wrap gap-x-6 gap-y-2 text-sm text-neutral-700">
-            <li>✓ Expédition 24 h</li><li>✓ Retours 14 jours</li><li>✓ Paiement sécurisé</li>
+            {site.reassurance.map((r) => <li key={r}>✓ {r}</li>)}
           </ul>
         </div>
-        <img src="/placeholder.svg" alt="" className="w-full aspect-square rounded-3xl bg-neutral-100" />
+        <img src={hero.image} alt="" className="w-full aspect-square rounded-3xl bg-neutral-100" />
       </section>
 
       <section className="max-w-6xl mx-auto px-4">
@@ -38,7 +35,7 @@ export default function Home() {
       <section id="faq" className="max-w-3xl mx-auto px-4 mt-20">
         <h2 className="text-2xl font-bold">Questions fréquentes</h2>
         <div className="mt-6 divide-y border rounded-2xl">
-          {faq.map(([q, a]) => (
+          {site.faq.map(([q, a]) => (
             <details key={q} className="p-4"><summary className="font-medium cursor-pointer">{q}</summary><p className="mt-2 text-neutral-600">{a}</p></details>
           ))}
         </div>

@@ -2,6 +2,8 @@
 
 @theme inline {
   --font-sans: var(--font-geist-sans);
+  --color-brand: var(--brand);
+  --color-dark: var(--dark);
 }
 
-:focus-visible { outline: 3px solid #059669; outline-offset: 2px; }
+:focus-visible { outline: 3px solid var(--brand); outline-offset: 2px; }

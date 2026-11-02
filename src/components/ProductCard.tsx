@@ -15,7 +15,7 @@ export default function ProductCard({ p }: { p: Product }) {
       </Link>
       <div className="mt-auto pt-3 flex items-center justify-between gap-2">
         <span className="font-bold">{formatPrice(p.price)}</span>
-        <button disabled={out} onClick={() => add(p.slug)} className="rounded-full bg-neutral-900 text-white text-sm px-4 py-2 disabled:bg-neutral-300">
+        <button disabled={out} onClick={() => add(p.slug)} className="rounded-full bg-dark text-white text-sm px-4 py-2 disabled:bg-neutral-300">
           {out ? "Épuisé" : "Ajouter"}
         </button>
       </div>

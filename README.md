@@ -1,4 +1,4 @@
-# MaBoutique
+# PureForme (boutique en ligne)
 
 Boutique en ligne en Next.js 15 + Tailwind CSS, pensée pour la conversion : panier latéral avec barre « livraison offerte », commande en une page sans compte, bouton d'achat fixe sur mobile, recherche et tri.
 
@@ -10,11 +10,11 @@ Boutique en ligne en Next.js 15 + Tailwind CSS, pensée pour la conversion : pan
 
 ## Modifier les produits
 
-Tout est dans `src/lib/products.ts` : nom, prix (en centimes), catégorie, stock, image (dans `public/`).
+Tout est expliqué pas à pas dans [MODIFIER.md](MODIFIER.md). En bref : les réglages (nom, couleurs, textes) sont dans `src/config/site.ts`, les produits dans `src/config/products.ts`.
 
 ## À faire
 
-- Choisir le catalogue et la marque
+- Remplacer les produits et la marque d'exemple
 - Brancher le paiement
 - Rédiger mentions légales et CGV (`src/app/mentions-legales/page.tsx`)
 - Mettre en ligne sur Vercel

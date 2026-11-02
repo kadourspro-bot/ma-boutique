@@ -31,7 +31,7 @@ export default function Boutique() {
       </div>
       <div className="mt-4 flex gap-2 overflow-x-auto pb-2">
         {cats.map((c) => (
-          <button key={c} onClick={() => setCat(c)} aria-pressed={cat === c} className={`shrink-0 rounded-full px-4 py-1.5 text-sm border ${cat === c ? "bg-neutral-900 text-white" : ""}`}>{c}</button>
+          <button key={c} onClick={() => setCat(c)} aria-pressed={cat === c} className={`shrink-0 rounded-full px-4 py-1.5 text-sm border ${cat === c ? "bg-dark text-white" : ""}`}>{c}</button>
         ))}
       </div>
       <p className="mt-4 text-sm text-neutral-600">{list.length} produit(s)</p>

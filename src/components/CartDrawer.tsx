@@ -18,9 +18,9 @@ export default function CartDrawer() {
         </div>
         <div className="p-4 border-b">
           <p className="text-sm">
-            {remaining > 0 ? <>Plus que <strong>{formatPrice(remaining)}</strong> pour la livraison offerte</> : <strong className="text-emerald-700">Livraison offerte débloquée 🎉</strong>}
+            {remaining > 0 ? <>Plus que <strong>{formatPrice(remaining)}</strong> pour la livraison offerte</> : <strong className="text-brand">Livraison offerte débloquée 🎉</strong>}
           </p>
-          <div className="mt-2 h-2 rounded bg-neutral-200"><div className="h-2 rounded bg-emerald-500" style={{ width: `${progress}%` }} /></div>
+          <div className="mt-2 h-2 rounded bg-neutral-200"><div className="h-2 rounded bg-brand" style={{ width: `${progress}%` }} /></div>
         </div>
         <ul className="flex-1 overflow-y-auto divide-y">
           {lines.length === 0 && <li className="p-6 text-neutral-500">Votre panier est vide.</li>}
@@ -47,7 +47,7 @@ export default function CartDrawer() {
             <div className="flex justify-between text-sm"><span>Sous-total</span><span>{formatPrice(subtotal)}</span></div>
             <div className="flex justify-between text-sm"><span>Livraison</span><span>{shipping === 0 ? "Offerte" : formatPrice(shipping)}</span></div>
             <div className="flex justify-between font-semibold text-lg"><span>Total</span><span>{formatPrice(total)}</span></div>
-            <Link href="/commande" onClick={() => setOpen(false)} className="block text-center rounded-full bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-3">
+            <Link href="/commande" onClick={() => setOpen(false)} className="block text-center rounded-full bg-brand hover:opacity-90 text-white font-semibold py-3">
               Commander en 1 minute →
             </Link>
             <p className="text-xs text-center text-neutral-500">Paiement sécurisé · CB, Apple Pay, Google Pay</p>

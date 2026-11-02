@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { useCart } from "@/lib/cart";
 import { getProduct, formatPrice } from "@/lib/products";
+import { site } from "@/config/site";
 
 // Checkout en une seule page. Le paiement sera branché ensuite (Stripe Checkout, Mollie, PayPlug…).
 export default function Commande() {
@@ -27,11 +28,12 @@ export default function Commande() {
         </div>
         <label className="block"><span className="text-sm font-medium">Téléphone (pour le transporteur)</span><input type="tel" autoComplete="tel" className={field} /></label>
         <fieldset className="space-y-2"><legend className="text-sm font-medium">Livraison</legend>
-          <label className="flex gap-2 border rounded-lg p-3"><input type="radio" name="ship" defaultChecked /> Point relais (2–3 j)</label>
-          <label className="flex gap-2 border rounded-lg p-3"><input type="radio" name="ship" /> Domicile (2 j)</label>
+          {site.shippingOptions.map((o, i) => (
+            <label key={o} className="flex gap-2 border rounded-lg p-3"><input type="radio" name="ship" defaultChecked={i === 0} /> {o}</label>
+          ))}
         </fieldset>
         <label className="flex gap-2 text-sm"><input required type="checkbox" /> J&apos;accepte les CGV.</label>
-        <button className="w-full rounded-full bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-3">Payer {formatPrice(total)}</button>
+        <button className="w-full rounded-full bg-brand hover:opacity-90 text-white font-semibold py-3">Payer {formatPrice(total)}</button>
         <p className="text-xs text-center text-neutral-500">Démo : aucun paiement réel n&apos;est effectué.</p>
       </form>
       <aside className="rounded-2xl bg-neutral-50 p-5 h-fit space-y-3">

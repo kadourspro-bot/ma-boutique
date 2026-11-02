@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { getProduct, products, formatPrice } from "@/lib/products";
 import AddToCart from "./AddToCart";
 import ProductCard from "@/components/ProductCard";
+import { site } from "@/config/site";
 
 export function generateStaticParams() { return products.map((p) => ({ slug: p.slug })); }
 
@@ -29,11 +30,11 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
           <h1 className="text-3xl font-bold mt-1">{p.name}</h1>
           <p className="text-2xl font-semibold mt-3">{formatPrice(p.price)}</p>
           <p className="mt-4 text-neutral-700">{p.description}</p>
-          <p className={`mt-4 text-sm ${p.stock > 0 ? "text-emerald-700" : "text-red-600"}`}>
+          <p className={`mt-4 text-sm ${p.stock > 0 ? "text-brand" : "text-red-600"}`}>
             {p.stock > 0 ? `● En stock · expédié sous 24 h` : "● Épuisé"}
           </p>
           <AddToCart slug={p.slug} price={p.price} disabled={p.stock === 0} />
-          <ul className="mt-6 text-sm space-y-1 text-neutral-700"><li>✓ Livraison suivie 2–3 jours</li><li>✓ Retours 14 jours</li><li>✓ Paiement sécurisé</li></ul>
+          <ul className="mt-6 text-sm space-y-1 text-neutral-700">{site.reassurance.map((r) => <li key={r}>✓ {r}</li>)}</ul>
         </div>
       </div>
       <h2 className="text-xl font-bold mt-16">Vous aimerez aussi</h2>
