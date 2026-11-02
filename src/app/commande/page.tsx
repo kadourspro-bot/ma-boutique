@@ -8,15 +8,15 @@ import { useEffect } from "react";
 
 // Checkout en une seule page. Le paiement sera branché ensuite (Stripe Checkout, Mollie, PayPlug…).
 export default function Commande() {
-  const { lines, subtotal, shipping, total, clear, setOrdered } = useCart();
+  const { lines, subtotal, shipping, total, clear, ordered, setOrdered } = useCart();
   useEffect(() => () => setOrdered(false), [setOrdered]); // en quittant la page, la lune revient
   const [done, setDone] = useState(false);
   if (done) return <PlanetArrival />;
   if (lines.length === 0) return <div className="max-w-xl mx-auto px-4 py-20 text-center"><p>Votre panier est vide.</p></div>;
   const field = "mt-1 w-full rounded-xl border border-silver/20 bg-night/60 px-3 py-2.5 outline-none focus:border-brand focus:shadow-[0_0_0_3px_color-mix(in_srgb,var(--lilac)_25%,transparent)]";
   return (
-    <div className="max-w-5xl mx-auto px-4 py-10 grid gap-10 md:grid-cols-[1fr_360px]">
-      <form onSubmit={(e) => { e.preventDefault(); clear(); setDone(true); setOrdered(true); window.scrollTo({ top: 0 }); }} className="glass rounded-3xl p-6 space-y-4">
+    <div className="max-w-5xl mx-auto px-4 py-10 grid gap-10 md:grid-cols-[1fr_360px]" style={{ opacity: ordered ? 0 : 1, transition: "opacity 1s ease" }}>
+      <form onSubmit={(e) => { e.preventDefault(); setOrdered(true); window.scrollTo({ top: 0, behavior: "smooth" }); setTimeout(() => { clear(); setDone(true); }, 1000); }} className="glass rounded-3xl p-6 space-y-4">
         <h1 className="font-display text-2xl font-bold title-gradient">Finaliser la commande</h1>
         <p className="text-sm text-white/60">Pas besoin de créer de compte.</p>
         <label className="block"><span className="text-sm font-medium">E-mail</span><input required type="email" autoComplete="email" className={field} /></label>

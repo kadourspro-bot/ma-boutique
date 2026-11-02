@@ -32,6 +32,7 @@ export const site = {
   // --- Après la commande : la planète arrive ---
   thankYou: {
     planet: "/images/planete.webp",
+    orion: "/images/orion-detoure.webp", // Orion détouré qui entre avec sa fiole
     message: "La beauté ne se voit qu'après les résultats.",
     subtitle: "Merci pour votre commande. Un e-mail de confirmation vient de partir vers votre orbite.",
   },

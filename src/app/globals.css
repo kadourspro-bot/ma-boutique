@@ -81,3 +81,6 @@ body { color: var(--ivory); }
 @keyframes planet-spin { 0% { transform: rotate(0) } 50% { transform: rotate(3deg) scale(1.015) } 100% { transform: rotate(0) } }
 @keyframes pulse-glow { 0%,100% { opacity: .7 } 50% { opacity: 1 } }
 @keyframes twinkle { 0%,100% { opacity: 0; transform: scale(.4) } 50% { opacity: 1; transform: scale(1.4) } }
+@keyframes soft-fade { from { opacity: 0; filter: blur(10px); transform: translateY(8px) } to { opacity: 1; filter: blur(0); transform: none } }
+/* Orion se penche légèrement et tend la fiole vers vous */
+@keyframes offer-vial { 0% { transform: none } 55% { transform: translateX(-3%) translateY(-1.5%) scale(1.06) rotate(-1.5deg) } 100% { transform: translateX(-2%) translateY(-1%) scale(1.05) rotate(-1deg) } }

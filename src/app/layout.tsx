@@ -7,6 +7,7 @@ import Header from "@/components/Header";
 import CartDrawer from "@/components/CartDrawer";
 import StationBackground from "@/components/StationBackground";
 import Logo from "@/components/Logo";
+import UiFader from "@/components/UiFader";
 import { site } from "@/config/site";
 
 const inter = Inter({ variable: "--font-inter", subsets: ["latin"] });
@@ -25,10 +26,10 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
       <body className={`${inter.variable} ${jost.variable} font-sans antialiased`}>
         <CartProvider>
           <StationBackground />
-          <Header />
+          <UiFader><Header /></UiFader>
           <main>{children}</main>
           <CartDrawer />
-          <footer className="mt-32 border-t border-silver/10 bg-night/60 backdrop-blur">
+          <UiFader><footer className="mt-32 border-t border-silver/10 bg-night/60 backdrop-blur">
             <div className="mx-auto grid max-w-6xl gap-8 px-4 py-12 text-sm text-ivory/60 sm:grid-cols-4">
               <div className="sm:col-span-2"><Logo withSignature /><p className="mt-4 max-w-xs">{site.description}</p></div>
               <ul className="space-y-2">
@@ -44,7 +45,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
               </ul>
             </div>
             <p className="pb-8 text-center text-xs text-ivory/35">© {new Date().getFullYear()} Lunaria · {site.company.legalName}</p>
-          </footer>
+          </footer></UiFader>
         </CartProvider>
       </body>
     </html>
