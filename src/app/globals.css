@@ -1,0 +1,7 @@
+@import "tailwindcss";
+
+@theme inline {
+  --font-sans: var(--font-geist-sans);
+}
+
+:focus-visible { outline: 3px solid #059669; outline-offset: 2px; }
