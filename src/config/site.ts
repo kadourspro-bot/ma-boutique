@@ -19,8 +19,22 @@ export const site = {
     turquoise: "#73D9D0", // turquoise lumineux : détails futuristes
   },
 
-  // --- Fond animé (étoiles et particules, mouvement lent) ---
-  background: { stars: 160, particles: 26 },
+  // --- Décor : la station lunaire et la lune qui avance à chaque étape ---
+  background: {
+    station: "/images/station.webp", // le laboratoire (baie vitrée transparente)
+    moon: "/images/lune.webp",
+    stars: 180,
+    // Position de la lune (en % de la largeur de la baie, 100 = à droite) pour chaque étape
+    moonSteps: { accueil: 74, boutique: 62, produit: 50, panier: 38, commande: 26, merci: -20 },
+    moonSeconds: 2.2, // durée du déplacement de la lune
+  },
+
+  // --- Après la commande : la planète arrive ---
+  thankYou: {
+    planet: "/images/planete.webp",
+    message: "La beauté ne se voit qu'après les résultats.",
+    subtitle: "Merci pour votre commande. Un e-mail de confirmation vient de partir vers votre orbite.",
+  },
 
   // --- Bandeau tout en haut ---
   announcement: "Livraison offerte dès 60 € · Échantillon Lunaria Nuit offert",
@@ -36,10 +50,6 @@ export const site = {
     title: "Votre beauté, nouvelle orbite.",
     subtitle: "Des rituels de beauté inspirés par la curiosité, la lumière et l'univers.",
     button: { label: "Découvrir la collection", href: "/#collection" },
-    // Image d'Orion : dépose le fichier dans public/images/ (sinon une illustration s'affiche)
-    image: "/images/orion.jpg",
-    // Vidéo en boucle (facultatif) : dépose un .mp4 dans public/images/, ex. "/images/laboratoire.mp4"
-    video: "/images/laboratoire.mp4",
   },
 
   reassurance: ["Livraison suivie 48 h", "Retours 14 jours", "Paiement sécurisé"],
@@ -64,7 +74,7 @@ export const site = {
       "Dans une station vitrée suspendue au-dessus de la Lune, le Professeur Orion imagine les rituels de beauté de demain. Curieux, inventif et un brin excentrique, il s'inspire de la lumière lunaire, des textures nacrées et des botaniques cultivées sous cloche.",
       "À ses côtés, M.O.O.N., son petit robot assistant, teste chaque texture avec un enthousiasme débordant (et quelques bips de satisfaction).",
     ],
-    image: "/images/orion.jpg",
+    image: "/images/orion.webp",
   },
 
   faq: [

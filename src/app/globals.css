@@ -71,3 +71,13 @@ body { color: var(--ivory); }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
 }
+
+/* Arrivée de la planète après la commande */
+@keyframes planet-in {
+  0% { transform: translate(40%, 60%) scale(.15) rotate(-25deg); opacity: 0; filter: blur(8px) saturate(1.6); }
+  35% { opacity: 1; }
+  100% { transform: translate(-50%, -50%) scale(1) rotate(0); opacity: 1; filter: none; }
+}
+@keyframes planet-spin { 0% { transform: rotate(0) } 50% { transform: rotate(3deg) scale(1.015) } 100% { transform: rotate(0) } }
+@keyframes pulse-glow { 0%,100% { opacity: .7 } 50% { opacity: 1 } }
+@keyframes twinkle { 0%,100% { opacity: 0; transform: scale(.4) } 50% { opacity: 1; transform: scale(1.4) } }

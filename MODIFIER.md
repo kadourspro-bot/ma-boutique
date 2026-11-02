@@ -32,13 +32,16 @@ ivory: "#F7F3EE",      // ivoire : textes, cartes produits
 turquoise: "#73D9D0",  // turquoise : détails futuristes
 ```
 
-**Ajouter les images d'Orion, du labo et de M.O.O.N. :** sur GitHub, ouvre le dossier `public/images/`, clique **Add file → Upload files** et dépose tes fichiers avec ces noms exacts :
-- `orion.jpg` : image principale de l'accueil et section « Univers »
-- `labo.jpg` : section « Le rituel »
-- `moon.jpg` : section newsletter
-- `laboratoire.mp4` : vidéo d'accueil en boucle (facultatif, sans son, moins de 8 Mo)
+**Le décor et la lune :** le laboratoire est `public/images/station.webp` (sa baie vitrée est transparente, c'est là que passe la lune). La lune est `public/images/lune.webp`. Dans `site.ts`, le bloc `background` règle la position de la lune à chaque étape (`moonSteps`, en % : 100 = tout à droite, 0 = tout à gauche) et la durée du déplacement (`moonSeconds`).
 
-Le site les affiche automatiquement. Tant qu'un fichier manque, une illustration le remplace.
+**Après la commande :** la planète (`public/images/planete.webp`) et le message se changent dans le bloc `thankYou` de `site.ts`.
+
+**Les autres images :** dépose dans `public/images/` (Add file → Upload files) :
+- `labo.jpg` : section « Le rituel »
+- `moon.jpg` : section newsletter (robot M.O.O.N.)
+- pour changer la photo d'Orion de la section « Univers », remplace `orion.webp` (ou change le chemin `universe.image`).
+
+Tant qu'un fichier manque, une illustration le remplace.
 
 **Changer les textes de l'accueil :** blocs `hero`, `ritual`, `universe`, `newsletter` et `faq` dans `site.ts`.
 

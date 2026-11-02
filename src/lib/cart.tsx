@@ -15,6 +15,8 @@ type Cart = {
   total: number;
   open: boolean;
   setOpen: (o: boolean) => void;
+  ordered: boolean; // commande validée : déclenche l'animation de la planète
+  setOrdered: (o: boolean) => void;
 };
 
 const CartContext = createContext<Cart | null>(null);
@@ -22,6 +24,7 @@ const CartContext = createContext<Cart | null>(null);
 export function CartProvider({ children }: { children: ReactNode }) {
   const [lines, setLines] = useState<Line[]>([]);
   const [open, setOpen] = useState(false);
+  const [ordered, setOrdered] = useState(false);
 
   useEffect(() => {
     try { const s = localStorage.getItem("cart"); if (s) setLines(JSON.parse(s)); } catch {}
@@ -47,7 +50,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
   const shipping = subtotal === 0 || subtotal >= FREE_SHIPPING_THRESHOLD ? 0 : SHIPPING_FEE;
 
   return (
-    <CartContext.Provider value={{ lines, add, setQty, remove, clear, count, subtotal, shipping, total: subtotal + shipping, open, setOpen }}>
+    <CartContext.Provider value={{ lines, add, setQty, remove, clear, count, subtotal, shipping, total: subtotal + shipping, open, setOpen, ordered, setOrdered }}>
       {children}
     </CartContext.Provider>
   );

@@ -5,7 +5,7 @@ import "./globals.css";
 import { CartProvider } from "@/lib/cart";
 import Header from "@/components/Header";
 import CartDrawer from "@/components/CartDrawer";
-import SpaceBackground from "@/components/SpaceBackground";
+import StationBackground from "@/components/StationBackground";
 import Logo from "@/components/Logo";
 import { site } from "@/config/site";
 
@@ -23,8 +23,8 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html lang="fr" style={vars}>
       <body className={`${inter.variable} ${jost.variable} font-sans antialiased`}>
-        <SpaceBackground />
         <CartProvider>
+          <StationBackground />
           <Header />
           <main>{children}</main>
           <CartDrawer />
