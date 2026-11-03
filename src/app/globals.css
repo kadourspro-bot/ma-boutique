@@ -85,13 +85,10 @@ body { color: var(--ivory); }
 /* Orion se penche légèrement et tend la fiole vers vous */
 @keyframes offer-vial { 0% { transform: none } 55% { transform: translateX(-3%) translateY(-1.5%) scale(1.06) rotate(-1.5deg) } 100% { transform: translateX(-2%) translateY(-1%) scale(1.05) rotate(-1deg) } }
 
-/* Décor vidéo : cadrage sur mobile, et la boucle d'attente qui dérive très lentement */
+/* Décor vidéo : cadrage sur mobile */
 .bg-media { object-position: var(--focus-m, 50%) center; }
 /* sur ordinateur, on garde toujours le haut de l'image : la tête du docteur n'est jamais coupée */
 @media (min-width: 768px) { .bg-media { object-position: center top; } }
-.idle-drift { transform-origin: 60% 45%; animation: idle-drift 16s ease-in-out infinite alternate; }
-@keyframes idle-drift { from { transform: scale(1) } to { transform: scale(1.025) translateX(-0.4%) } }
-@media (prefers-reduced-motion: reduce) { .idle-drift { animation: none; } }
 
 /* Changement de page : le contenu s'efface en flou pendant que le docteur se déplace,
    puis la nouvelle page apparaît en douceur, élément par élément.
