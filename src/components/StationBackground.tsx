@@ -2,51 +2,63 @@
 import { useEffect, useRef, useState, type CSSProperties } from "react";
 import { usePathname } from "next/navigation";
 import { useCart } from "@/lib/cart";
+import { usePageTransition } from "@/lib/transition";
 import { site } from "@/config/site";
 
-// Décor fixe du site : 6 vidéos du laboratoire, une par étape du parcours d'achat.
-// - On avance d'une étape : la vidéo de l'étape se joue une fois.
-// - On recule d'une étape : la vidéo de l'étape quittée se joue à l'envers.
-// - Ensuite, le scientifique « attend » sur la dernière image (léger mouvement de
-//   caméra + particules lumineuses), aussi longtemps que le client reste sur la page.
+// Décor fixe du site : le docteur dans son laboratoire, une vidéo par étape d'achat.
+// - On avance d'une étape : la vidéo de l'étape se joue en entier (il se déplace).
+// - On revient en arrière (ou on saute des étapes) : pas de marche arrière ; le décor
+//   se fond dans la fin de la vidéo de l'étape visée, comme un changement de plan au
+//   cinéma : on voit le docteur arriver à sa place.
+// - Ensuite, il « attend » : une courte boucle vidéo au ralenti (il respire, bouge à
+//   peine), sans couture, aussi longtemps que le client reste sur l'étape.
 // Réglages : src/config/site.ts → background.
 
 type Step = keyof typeof site.background.scenes;
 const ORDER: Step[] = ["accueil", "boutique", "produit", "panier", "commande", "merci"];
 const scenes = site.background.scenes;
+// La boucle d'attente commence 0,6 s avant la fin de la vidéo de l'étape :
+// on passe de l'une à l'autre à ce moment-là, l'image est la même.
+const IDLE_LEAD = 0.6;
 
-type Clip = { src: string; end: string; key: number };
+type Move = { step: Step; from: number; fade: number; key: number };
+
+function stepFor(path: string, open: boolean, ordered: boolean): Step {
+  let step: Step = "accueil";
+  if (path.startsWith("/boutique")) step = "boutique";
+  if (path.startsWith("/produit")) step = "produit";
+  if (open) step = "panier";
+  if (path.startsWith("/commande")) step = ordered ? "merci" : "commande";
+  return step;
+}
 
 export default function StationBackground() {
   const pathname = usePathname();
   const { open, ordered } = useCart();
+  const { target, leaving } = usePageTransition();
 
-  let step: Step = "accueil";
-  if (pathname.startsWith("/boutique")) step = "boutique";
-  if (pathname.startsWith("/produit")) step = "produit";
-  if (open) step = "panier";
-  if (pathname.startsWith("/commande")) step = ordered ? "merci" : "commande";
+  // pendant la sortie d'une page, le docteur part déjà vers l'étape suivante
+  const step = stepFor(target ?? pathname, open && !target, ordered);
   const idx = ORDER.indexOf(step);
-  const isHome = pathname === "/";
+  const isHome = (target ?? pathname) === "/";
   const done = step === "merci";
-  const clear = done || step === "panier"; // vidéo bien nette, sans voile
+  const clear = done || step === "panier" || leaving; // vidéo bien nette, sans voile
 
-  const [still, setStill] = useState<string>(site.background.debut); // image d'attente
-  const [clip, setClip] = useState<Clip | null>(null); // vidéo en cours
-  const [visible, setVisible] = useState(false); // la vidéo est-elle affichée ?
+  const [idle, setIdle] = useState<Step | null>(null); // boucle d'attente affichée
+  const [move, setMove] = useState<Move | null>(null); // déplacement en cours
+  const [moveOn, setMoveOn] = useState(false); // le déplacement est-il visible ?
+  const [still, setStill] = useState<string>(site.background.debut); // image de secours
   const prev = useRef<number | null>(null);
   const counter = useRef(0);
+  const idleRef = useRef<HTMLVideoElement>(null);
+  const moveRef = useRef<HTMLVideoElement>(null);
+  const swapped = useRef(false);
 
-  // Précharge les images d'attente pour que le passage vidéo → image soit invisible
-  useEffect(() => {
-    ORDER.forEach((s) => { const i = new Image(); i.src = scenes[s].fin; });
-  }, []);
-
-  // Choisit quelle vidéo jouer quand l'étape change
+  // Choisit le déplacement quand l'étape change
   // (petit délai : quand on clique « Commander », le panier se ferme juste avant le
   // changement de page ; on attend que tout soit stable pour ne pas jouer un faux retour)
   useEffect(() => {
-    const timer = setTimeout(() => decide(), 200);
+    const timer = setTimeout(() => decide(), 120);
     return () => clearTimeout(timer);
   }, [idx]); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -54,66 +66,103 @@ export default function StationBackground() {
     const from = prev.current;
     if (from === idx) return;
     prev.current = idx;
-    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const sceneNow = scenes[ORDER[idx]];
-    if (reduce) { setClip(null); setVisible(false); setStill(sceneNow.fin); return; }
-
-    const play = (src: string, start: string, end: string) => {
-      setStill(start);
-      setVisible(false);
-      setClip({ src, end, key: ++counter.current });
-    };
-    const before = idx > 0 ? scenes[ORDER[idx - 1]].fin : site.background.debut;
-
-    if (from === null || idx > from) {
-      // première visite ou on avance : vidéo de l'étape, depuis la fin de l'étape d'avant
-      play(sceneNow.video, before, sceneNow.fin);
-    } else if (idx < from) {
-      const left = scenes[ORDER[from]];
-      if (from - idx === 1 && left.retour) play(left.retour, left.fin, sceneNow.fin);
-      else { setClip(null); setVisible(false); setStill(sceneNow.fin); }
+    const s = ORDER[idx];
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) { setMove(null); setIdle(null); setStill(scenes[s].fin); return; }
+    swapped.current = false;
+    setMoveOn(false);
+    if (from === null || idx === from + 1) {
+      // première visite ou étape suivante : la vidéo entière
+      setMove({ step: s, from: 0, fade: 0.35, key: ++counter.current });
+    } else {
+      // retour en arrière ou saut d'étapes : fondu dans la fin de la vidéo visée
+      setMove({ step: s, from: -site.background.arrivee, fade: 0.9, key: ++counter.current });
     }
   };
 
-  const onEnded = () => {
-    if (!clip) return;
-    setStill(clip.end);
-    // on laisse l'image s'afficher sous la vidéo avant de retirer la vidéo
-    requestAnimationFrame(() => requestAnimationFrame(() => { setVisible(false); setClip(null); }));
+  // La vidéo de déplacement a démarré : on place la boucle d'attente de la même étape
+  // derrière elle (en pause au début), pour qu'elle soit chargée au moment du relais.
+  const onMovePlaying = () => {
+    setMoveOn(true);
+    if (move) setTimeout(() => setIdle(move.step), move.fade * 1000 + 50);
   };
 
+  const onMoveMeta = () => {
+    const v = moveRef.current;
+    if (v && move && move.from < 0) v.currentTime = Math.max(0, v.duration + move.from);
+  };
+
+  // Relais : un peu avant la fin du déplacement, la boucle d'attente prend le relais
+  const onMoveTime = () => {
+    const v = moveRef.current;
+    if (!v || !move || swapped.current || !v.duration) return;
+    if (v.currentTime >= v.duration - IDLE_LEAD) handOver();
+  };
+
+  const handOver = () => {
+    if (swapped.current) return;
+    swapped.current = true;
+    if (move) setStill(scenes[move.step].fin);
+    const i = idleRef.current;
+    if (move && idle !== move.step) setIdle(move.step);
+    if (i) { i.currentTime = 0; i.play().catch(() => {}); }
+    setMoveOn(false);
+    setTimeout(() => setMove((m) => (m && m.key === move?.key ? null : m)), 400);
+  };
+
+  // si la boucle change de source pendant le relais, on la relance au début
+  useEffect(() => {
+    const i = idleRef.current;
+    if (i && swapped.current) { i.currentTime = 0; i.play().catch(() => {}); }
+  }, [idle]);
+
   const focus = site.background.mobileFocus;
+  const idleScene = idle ? scenes[idle] : null;
+  const moveScene = move ? scenes[move.step] : null;
   return (
     <div aria-hidden className="fixed inset-0 -z-10 overflow-hidden bg-night" style={{ "--focus-m": focus } as CSSProperties}>
       {/* sur ordinateur, quand le panier est ouvert à droite, la scène glisse un peu
           vers la gauche pour que le docteur ne soit pas caché derrière le panier */}
       <div className={`bg-stage absolute inset-0${step === "panier" ? " cart-open" : ""}`}>
-      {/* le scientifique qui attend : dernière image, qui « respire » doucement */}
-      <img
-        key={still}
-        src={still}
-        alt=""
-        className="bg-media idle-breathe absolute inset-0 h-full w-full object-cover"
-      />
-      {/* la vidéo de l'étape */}
-      {clip && (
-        <video
-          key={clip.key}
-          src={clip.src}
-          autoPlay
-          muted
-          playsInline
-          preload="auto"
-          onPlaying={() => setVisible(true)}
-          onEnded={onEnded}
-          onError={onEnded}
-          className="bg-media absolute inset-0 h-full w-full object-cover"
-          style={{ opacity: visible ? 1 : 0, transition: "opacity .35s ease" }}
-        />
-      )}
+        {/* image de secours (chargement, mouvements réduits) */}
+        <img src={still} alt="" className="bg-media absolute inset-0 h-full w-full object-cover" />
+        {/* le docteur qui attend : boucle au ralenti, sans couture */}
+        {idleScene && (
+          <video
+            ref={idleRef}
+            key={idleScene.attente}
+            src={idleScene.attente}
+            poster={idleScene.fin}
+            muted
+            loop
+            playsInline
+            preload="auto"
+            autoPlay={!move}
+            className="bg-media idle-drift absolute inset-0 h-full w-full object-cover"
+          />
+        )}
+        {/* le déplacement du docteur vers l'étape */}
+        {move && moveScene && (
+          <video
+            ref={moveRef}
+            key={move.key}
+            src={moveScene.video}
+            autoPlay
+            muted
+            playsInline
+            preload="auto"
+            onLoadedMetadata={onMoveMeta}
+            onPlaying={onMovePlaying}
+            onTimeUpdate={onMoveTime}
+            onEnded={handOver}
+            onError={handOver}
+            className="bg-media absolute inset-0 h-full w-full object-cover"
+            style={{ opacity: moveOn ? 1 : 0, transition: `opacity ${moveOn ? move.fade : 0.35}s ease` }}
+          />
+        )}
       </div>
       <Particles day={done} />
-      {/* voile pour la lisibilité des textes : léger sur l'accueil, plus dense ailleurs, absent à la fin */}
+      {/* voile pour la lisibilité des textes : léger sur l'accueil, plus dense ailleurs,
+          absent à la fin, quand le panier est ouvert et pendant les changements de page */}
       <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, rgb(17 21 43 / .35) 0%, rgb(17 21 43 / .05) 35%, rgb(17 21 43 / .7) 100%)", opacity: clear ? 0 : 1, transition: "opacity 1s ease" }} />
       <div className="absolute inset-0 bg-night" style={{ opacity: clear ? 0 : isHome ? 0.1 : 0.55, transition: "opacity 1s ease" }} />
     </div>
