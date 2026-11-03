@@ -10,7 +10,8 @@ export default function CartDrawer() {
   const progress = Math.min(100, (subtotal / FREE_SHIPPING_THRESHOLD) * 100);
   return (
     <div className="fixed inset-0 z-50" role="dialog" aria-modal="true" aria-label="Panier">
-      <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" onClick={() => setOpen(false)} />
+      {/* zone transparente : on voit le laboratoire derrière ; un clic ferme le panier */}
+      <div className="absolute inset-0" onClick={() => setOpen(false)} />
       <aside className="absolute right-0 top-0 h-full w-full max-w-md bg-night/95 border-l border-silver/15 shadow-2xl flex flex-col">
         <div className="flex items-center justify-between p-4 border-b border-white/10">
           <h2 className="font-display font-semibold tracking-wider">Votre panier</h2>

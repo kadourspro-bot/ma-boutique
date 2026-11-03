@@ -27,7 +27,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <CartProvider>
           <StationBackground />
           <UiFader><Header /></UiFader>
-          <main>{children}</main>
+          <UiFader onlyCart><main>{children}</main></UiFader>
           <CartDrawer />
           <UiFader><footer className="mt-32 border-t border-silver/10 bg-night/60 backdrop-blur">
             <div className="mx-auto grid max-w-6xl gap-8 px-4 py-12 text-sm text-ivory/60 sm:grid-cols-4">

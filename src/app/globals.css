@@ -91,3 +91,5 @@ body { color: var(--ivory); }
 .idle-breathe { transform-origin: 60% 45%; animation: idle-breathe 9s ease-in-out infinite alternate; }
 @keyframes idle-breathe { from { transform: scale(1) } to { transform: scale(1.035) translateY(-0.4%) } }
 @media (prefers-reduced-motion: reduce) { .idle-breathe { animation: none; } }
+.bg-stage { transition: transform .9s cubic-bezier(.45,.05,.2,1); }
+@media (min-width: 768px) { .bg-stage.cart-open { transform: translateX(-14rem); } }

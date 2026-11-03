@@ -29,6 +29,7 @@ export default function StationBackground() {
   const idx = ORDER.indexOf(step);
   const isHome = pathname === "/";
   const done = step === "merci";
+  const clear = done || step === "panier"; // vidéo bien nette, sans voile
 
   const [still, setStill] = useState<string>(site.background.debut); // image d'attente
   const [clip, setClip] = useState<Clip | null>(null); // vidéo en cours
@@ -84,6 +85,9 @@ export default function StationBackground() {
   const focus = site.background.mobileFocus;
   return (
     <div aria-hidden className="fixed inset-0 -z-10 overflow-hidden bg-night" style={{ "--focus-m": focus } as CSSProperties}>
+      {/* sur ordinateur, quand le panier est ouvert à droite, la scène glisse un peu
+          vers la gauche pour que le docteur ne soit pas caché derrière le panier */}
+      <div className={`bg-stage absolute inset-0${step === "panier" ? " cart-open" : ""}`}>
       {/* le scientifique qui attend : dernière image, qui « respire » doucement */}
       <img
         key={still}
@@ -107,10 +111,11 @@ export default function StationBackground() {
           style={{ opacity: visible ? 1 : 0, transition: "opacity .35s ease" }}
         />
       )}
+      </div>
       <Particles day={done} />
       {/* voile pour la lisibilité des textes : léger sur l'accueil, plus dense ailleurs, absent à la fin */}
-      <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, rgb(17 21 43 / .35) 0%, rgb(17 21 43 / .05) 35%, rgb(17 21 43 / .7) 100%)", opacity: done ? 0 : 1, transition: "opacity 2s ease" }} />
-      <div className="absolute inset-0 bg-night" style={{ opacity: done ? 0 : isHome ? 0.1 : 0.55, transition: "opacity 1.2s ease" }} />
+      <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, rgb(17 21 43 / .35) 0%, rgb(17 21 43 / .05) 35%, rgb(17 21 43 / .7) 100%)", opacity: clear ? 0 : 1, transition: "opacity 1s ease" }} />
+      <div className="absolute inset-0 bg-night" style={{ opacity: clear ? 0 : isHome ? 0.1 : 0.55, transition: "opacity 1s ease" }} />
     </div>
   );
 }
