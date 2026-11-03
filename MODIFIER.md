@@ -32,9 +32,9 @@ ivory: "#F7F3EE",      // ivoire : textes, cartes produits
 turquoise: "#73D9D0",  // turquoise : détails futuristes
 ```
 
-**Le décor et la lune :** le laboratoire est `public/images/station.webp` (sa baie vitrée est transparente, c'est là que passe la lune). La lune est `public/images/lune.webp`. Dans `site.ts`, le bloc `background` règle la position de la lune à chaque étape (`moonSteps`, en % : 100 = tout à droite, 0 = tout à gauche) et la durée du déplacement (`moonSeconds`).
+**Le décor vidéo :** le fond du site, ce sont les 6 vidéos du dossier `public/videos/` (une par étape : accueil, boutique, fiche produit, panier, commande, après le paiement). Quand le client arrive sur une étape, sa vidéo se joue une fois. Ensuite le scientifique « attend » sur la dernière image (`etape-N-fin.jpg`), qui bouge très légèrement avec des petites lueurs. S'il revient en arrière, la vidéo `etape-N-retour.mp4` (la même à l'envers) est jouée. Pour changer une vidéo, remplace le fichier en gardant **exactement le même nom**, et pense à remplacer aussi son image `-fin.jpg` et sa version `-retour.mp4` (je peux te les refaire). Les chemins sont dans le bloc `background` de `site.ts`, ainsi que le cadrage sur mobile (`mobileFocus`) et le nombre de lueurs (`particles`, 0 pour les enlever).
 
-**Après la commande :** la planète apparaît dans la baie, le labo passe au jour, Orion (`public/images/orion-detoure.webp`) entre et tend sa fiole, puis la phrase apparaît en fondu. La planète, Orion et le message se changent dans le bloc `thankYou` de `site.ts`.
+**Après la commande :** la vidéo 6 se joue (le jour se lève, la planète apparaît), puis la phrase apparaît en fondu. Le message et le sous-titre se changent dans le bloc `thankYou` de `site.ts`.
 
 **Les autres images :** dépose dans `public/images/` (Add file → Upload files) :
 - `labo.jpg` : section « Le rituel »

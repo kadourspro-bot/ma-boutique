@@ -1,6 +1,3 @@
-station.webp  : décor du laboratoire (baie vitrée transparente)
-lune.webp     : la lune qui se déplace à chaque étape
-planete.webp  : la planète qui arrive après la commande
 orion.webp    : Professeur Orion (section « Univers »)
 labo.jpg      : (à déposer) section « Le rituel »
 moon.jpg      : (à déposer) section newsletter, robot M.O.O.N.

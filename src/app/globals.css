@@ -84,3 +84,10 @@ body { color: var(--ivory); }
 @keyframes soft-fade { from { opacity: 0; filter: blur(10px); transform: translateY(8px) } to { opacity: 1; filter: blur(0); transform: none } }
 /* Orion se penche légèrement et tend la fiole vers vous */
 @keyframes offer-vial { 0% { transform: none } 55% { transform: translateX(-3%) translateY(-1.5%) scale(1.06) rotate(-1.5deg) } 100% { transform: translateX(-2%) translateY(-1%) scale(1.05) rotate(-1deg) } }
+
+/* Décor vidéo : cadrage sur mobile, et l'image d'attente qui « respire » */
+.bg-media { object-position: var(--focus-m, 50%) center; }
+@media (min-width: 768px) { .bg-media { object-position: center; } }
+.idle-breathe { transform-origin: 60% 45%; animation: idle-breathe 9s ease-in-out infinite alternate; }
+@keyframes idle-breathe { from { transform: scale(1) } to { transform: scale(1.035) translateY(-0.4%) } }
+@media (prefers-reduced-motion: reduce) { .idle-breathe { animation: none; } }

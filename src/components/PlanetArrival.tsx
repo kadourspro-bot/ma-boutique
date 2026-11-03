@@ -9,7 +9,7 @@ export default function PlanetArrival() {
   const t = site.thankYou;
   return (
     <div className="fixed inset-0 z-40 flex items-end px-4 pb-6 sm:px-[8vw] sm:pb-[12vh]" role="status">
-      <div className="max-w-xl rounded-3xl bg-white/45 p-5 backdrop-blur-md sm:bg-transparent sm:p-0 sm:backdrop-blur-0" style={{ animation: "soft-fade 2s ease-in-out 7s both" }}>
+      <div className="max-w-xl rounded-3xl bg-white/45 p-5 backdrop-blur-md sm:p-8" style={{ animation: "soft-fade 2s ease-in-out 7s both" }}>
         <p className="font-display text-3xl font-light leading-tight text-night sm:text-6xl" style={{ animation: "soft-fade 3s ease-in-out 7.4s both", textShadow: "0 2px 30px rgb(255 255 255 / .6)" }}>
           {t.message}
         </p>
