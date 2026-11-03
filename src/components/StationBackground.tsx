@@ -10,16 +10,16 @@ import { site } from "@/config/site";
 // - On revient en arrière (ou on saute des étapes) : pas de marche arrière ; le décor
 //   se fond dans la fin de la vidéo de l'étape visée, comme un changement de plan au
 //   cinéma : on voit le docteur arriver à sa place.
-// - Ensuite, il « attend » : une courte boucle vidéo au ralenti (il respire, bouge à
+// - Ensuite, il « attend » : une courte boucle vidéo (il respire, bouge à
 //   peine), sans couture, aussi longtemps que le client reste sur l'étape.
 // Réglages : src/config/site.ts → background.
 
 type Step = keyof typeof site.background.scenes;
 const ORDER: Step[] = ["accueil", "boutique", "produit", "panier", "commande", "merci"];
 const scenes = site.background.scenes;
-// La boucle d'attente commence 0,6 s avant la fin de la vidéo de l'étape :
-// on passe de l'une à l'autre à ce moment-là, l'image est la même.
-const IDLE_LEAD = 0.6;
+// La boucle d'attente commence sur la dernière image de la vidéo de l'étape :
+// elle prend le relais en fondu pendant les 0,35 dernières secondes.
+const IDLE_LEAD = 0.35;
 
 type Move = { step: Step; from: number; fade: number; key: number };
 
@@ -126,7 +126,7 @@ export default function StationBackground() {
       <div className={`bg-stage absolute inset-0${step === "panier" ? " cart-open" : ""}`} style={{ top: headerShown ? "var(--header-h, 0px)" : 0 }}>
         {/* image de secours (chargement, mouvements réduits) */}
         <img src={still} alt="" className="bg-media absolute inset-0 h-full w-full object-cover" />
-        {/* le docteur qui attend : boucle au ralenti, sans couture */}
+        {/* le docteur qui attend : boucle aller-retour, sans couture */}
         {idleScene && (
           <video
             ref={idleRef}

@@ -22,7 +22,8 @@ export const site = {
   // --- Décor : les 6 vidéos du laboratoire, une par étape d'achat ---
   // Pour chaque étape :
   // - video   : le docteur se déplace jusqu'à l'étape (jouée quand on avance d'une étape) ;
-  // - attente : courte boucle au ralenti jouée tant que le client reste sur l'étape ;
+  // - attente : boucle jouée tant que le client reste sur l'étape (ta vidéo d'attente
+  //             jouée à l'endroit puis à l'envers, pour boucler sans coupure) ;
   // - fin     : image de secours (chargement, ou si le visiteur a réduit les animations).
   // Quand on revient en arrière, pas de marche arrière : le décor se fond dans les
   // dernières secondes de la vidéo de l'étape visée (durée réglable : arrivee).
