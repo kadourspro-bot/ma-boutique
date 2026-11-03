@@ -3,6 +3,7 @@ import { Inter, Jost } from "next/font/google";
 import Link from "next/link";
 import "./globals.css";
 import { CartProvider } from "@/lib/cart";
+import { PageTransitionProvider, PageContent } from "@/lib/transition";
 import Header from "@/components/Header";
 import CartDrawer from "@/components/CartDrawer";
 import StationBackground from "@/components/StationBackground";
@@ -25,9 +26,10 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     <html lang="fr" style={vars}>
       <body className={`${inter.variable} ${jost.variable} font-sans antialiased`}>
         <CartProvider>
+        <PageTransitionProvider>
           <StationBackground />
           <UiFader><Header /></UiFader>
-          <UiFader onlyCart><main>{children}</main></UiFader>
+          <UiFader onlyCart><main><PageContent>{children}</PageContent></main></UiFader>
           <CartDrawer />
           <UiFader><footer className="mt-32 border-t border-silver/10 bg-night/60 backdrop-blur">
             <div className="mx-auto grid max-w-6xl gap-8 px-4 py-12 text-sm text-ivory/60 sm:grid-cols-4">
@@ -46,6 +48,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
             </div>
             <p className="pb-8 text-center text-xs text-ivory/35">© {new Date().getFullYear()} Lunaria · {site.company.legalName}</p>
           </footer></UiFader>
+        </PageTransitionProvider>
         </CartProvider>
       </body>
     </html>

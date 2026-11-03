@@ -20,20 +20,25 @@ export const site = {
   },
 
   // --- Décor : les 6 vidéos du laboratoire, une par étape d'achat ---
-  // Chaque vidéo se joue une fois quand le client arrive sur l'étape, puis le
-  // scientifique « attend » sur la dernière image (léger mouvement + particules).
-  // Si le client revient en arrière, la vidéo « retour » (à l'envers) est jouée.
-  // Pour changer une vidéo : remplace le fichier dans public/videos/ en gardant le même nom.
+  // Pour chaque étape :
+  // - video   : le docteur se déplace jusqu'à l'étape (jouée quand on avance d'une étape) ;
+  // - attente : courte boucle au ralenti jouée tant que le client reste sur l'étape ;
+  // - fin     : image de secours (chargement, ou si le visiteur a réduit les animations).
+  // Quand on revient en arrière, pas de marche arrière : le décor se fond dans les
+  // dernières secondes de la vidéo de l'étape visée (durée réglable : arrivee).
+  // Pour changer une vidéo : remplace le fichier dans public/videos/ en gardant le même nom
+  // (la boucle « attente » et l'image « fin » se refont à partir de la vidéo : demande-moi).
   background: {
     debut: "/videos/etape-1-debut.jpg", // image affichée pendant le chargement
     scenes: {
-      accueil: { video: "/videos/etape-1.mp4", fin: "/videos/etape-1-fin.jpg", retour: "" },
-      boutique: { video: "/videos/etape-2.mp4", fin: "/videos/etape-2-fin.jpg", retour: "/videos/etape-2-retour.mp4" },
-      produit: { video: "/videos/etape-3.mp4", fin: "/videos/etape-3-fin.jpg", retour: "/videos/etape-3-retour.mp4" },
-      panier: { video: "/videos/etape-4.mp4", fin: "/videos/etape-4-fin.jpg", retour: "/videos/etape-4-retour.mp4" },
-      commande: { video: "/videos/etape-5.mp4", fin: "/videos/etape-5-fin.jpg", retour: "/videos/etape-5-retour.mp4" },
-      merci: { video: "/videos/etape-6.mp4", fin: "/videos/etape-6-fin.jpg", retour: "" },
+      accueil: { video: "/videos/etape-1.mp4", attente: "/videos/etape-1-attente.mp4", fin: "/videos/etape-1-fin.jpg" },
+      boutique: { video: "/videos/etape-2.mp4", attente: "/videos/etape-2-attente.mp4", fin: "/videos/etape-2-fin.jpg" },
+      produit: { video: "/videos/etape-3.mp4", attente: "/videos/etape-3-attente.mp4", fin: "/videos/etape-3-fin.jpg" },
+      panier: { video: "/videos/etape-4.mp4", attente: "/videos/etape-4-attente.mp4", fin: "/videos/etape-4-fin.jpg" },
+      commande: { video: "/videos/etape-5.mp4", attente: "/videos/etape-5-attente.mp4", fin: "/videos/etape-5-fin.jpg" },
+      merci: { video: "/videos/etape-6.mp4", attente: "/videos/etape-6-attente.mp4", fin: "/videos/etape-6-fin.jpg" },
     },
+    arrivee: 2.5, // secondes de vidéo montrées quand on revient à une étape précédente
     // Sur mobile, partie de la vidéo gardée à l'écran (0% = gauche, 100% = droite)
     mobileFocus: "68%",
     particles: 40, // petites lueurs qui flottent pendant l'attente (0 pour les enlever)
