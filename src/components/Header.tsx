@@ -1,13 +1,25 @@
 "use client";
 import Link from "next/link";
+import { useEffect, useRef } from "react";
 import { useCart } from "@/lib/cart";
 import { site } from "@/config/site";
 import Logo from "./Logo";
 
 export default function Header() {
   const { count, setOpen } = useCart();
+  // hauteur de l'en-tête, utilisée par le décor pour placer le docteur juste en dessous
+  const ref = useRef<HTMLElement>(null);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const set = () => document.documentElement.style.setProperty("--header-h", `${el.offsetHeight}px`);
+    set();
+    const ro = new ResizeObserver(set);
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, []);
   return (
-    <header className="sticky top-0 z-30 border-b border-silver/10 bg-night/70 backdrop-blur-xl">
+    <header ref={ref} className="sticky top-0 z-30 border-b border-silver/10 bg-night/70 backdrop-blur-xl">
       <p className="border-b border-silver/5 py-2 text-center font-display text-[10px] uppercase tracking-[0.25em] text-silver/80 sm:text-xs">{site.announcement}</p>
       <nav className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4" aria-label="Navigation principale">
         <Link href="/" aria-label="Lunaria, accueil"><Logo /></Link>

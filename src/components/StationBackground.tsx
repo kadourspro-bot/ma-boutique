@@ -43,6 +43,7 @@ export default function StationBackground() {
   const isHome = (target ?? pathname) === "/";
   const done = step === "merci";
   const clear = done || step === "panier" || leaving; // vidéo bien nette, sans voile
+  const headerShown = !open && !ordered; // l'en-tête est visible : le décor commence sous lui
 
   const [idle, setIdle] = useState<Step | null>(null); // boucle d'attente affichée
   const [move, setMove] = useState<Move | null>(null); // déplacement en cours
@@ -122,7 +123,7 @@ export default function StationBackground() {
     <div aria-hidden className="fixed inset-0 -z-10 overflow-hidden bg-night" style={{ "--focus-m": focus } as CSSProperties}>
       {/* sur ordinateur, quand le panier est ouvert à droite, la scène glisse un peu
           vers la gauche pour que le docteur ne soit pas caché derrière le panier */}
-      <div className={`bg-stage absolute inset-0${step === "panier" ? " cart-open" : ""}`}>
+      <div className={`bg-stage absolute inset-0${step === "panier" ? " cart-open" : ""}`} style={{ top: headerShown ? "var(--header-h, 0px)" : 0 }}>
         {/* image de secours (chargement, mouvements réduits) */}
         <img src={still} alt="" className="bg-media absolute inset-0 h-full w-full object-cover" />
         {/* le docteur qui attend : boucle au ralenti, sans couture */}
