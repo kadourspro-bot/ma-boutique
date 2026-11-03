@@ -22,11 +22,11 @@ export default function Home() {
         <div className="flex flex-wrap items-end justify-between gap-4">
           <div>
             <p className="kicker">La collection</p>
-            <h2 className="mt-3 font-display text-3xl font-light sm:text-4xl">Quatre gammes, une même orbite.</h2>
+            <h2 className="mt-3 font-display text-3xl font-light sm:text-4xl">{products.length > 1 ? "Une collection, une même orbite." : "Un sérum, une nouvelle orbite."}</h2>
           </div>
           <Link href="/boutique" className="text-sm text-turquoise hover:underline">Tout voir →</Link>
         </div>
-        <div className="mt-10 grid grid-cols-2 gap-4 lg:grid-cols-3">{products.map((p) => <ProductCard key={p.slug} p={p} />)}</div>
+        <div className={`mt-10 grid gap-4 ${products.length > 1 ? "grid-cols-2 lg:grid-cols-3" : "mx-auto max-w-sm grid-cols-1"}`}>{products.map((p) => <ProductCard key={p.slug} p={p} />)}</div>
       </section>
 
       {/* 3. Le rituel */}
@@ -34,7 +34,7 @@ export default function Home() {
         <div className="glass relative aspect-[4/3] overflow-hidden rounded-[2rem]">
           <Visual src={ritual.image} alt="Fioles et botaniques sous cloche dans le laboratoire Lunaria" fallback={
             <div className="absolute inset-0 grid place-items-center" style={{ background: "radial-gradient(circle at 50% 70%, rgb(183 161 232 / .35), transparent 60%)" }}>
-              <div className="flex items-end gap-6">{["eclat", "nuit", "glow"].map((n, i) => <img key={n} src={`/products/${n}.svg`} alt="" className={`w-28 animate-float ${i === 1 ? "w-36" : ""}`} style={{ animationDelay: `${i * 0.8}s` }} />)}</div>
+              <div className="flex items-end gap-6">{products.slice(0, 3).map((p, i) => <img key={p.slug} src={p.image} alt="" className={`w-28 animate-float ${i === 1 || products.length === 1 ? "w-36" : ""}`} style={{ animationDelay: `${i * 0.8}s` }} />)}</div>
             </div>} />
         </div>
         <div>

@@ -27,7 +27,8 @@ export function CartProvider({ children }: { children: ReactNode }) {
   const [ordered, setOrdered] = useState(false);
 
   useEffect(() => {
-    try { const s = localStorage.getItem("cart"); if (s) setLines(JSON.parse(s)); } catch {}
+    // on ignore les produits qui n'existent plus (retirés de products.ts)
+    try { const s = localStorage.getItem("cart"); if (s) setLines((JSON.parse(s) as Line[]).filter((l) => getProduct(l.slug))); } catch {}
   }, []);
   useEffect(() => {
     try { localStorage.setItem("cart", JSON.stringify(lines)); } catch {}
