@@ -10,14 +10,15 @@ import { site } from "@/config/site";
 // - On revient en arrière (ou on saute des étapes) : pas de marche arrière ; le décor
 //   se fond dans la fin de la vidéo de l'étape visée, comme un changement de plan au
 //   cinéma : on voit le docteur arriver à sa place.
-// - Ensuite, il « attend » : une courte boucle vidéo (il respire, bouge à
-//   peine), sans couture, aussi longtemps que le client reste sur l'étape.
+// - Ensuite, il « attend » : sa vidéo d'attente se joue une fois (il respire, bouge à
+//   peine), puis il reste immobile sur la dernière image. Sans vidéo d'attente
+//   (attente: ""), il reste immobile dès la fin de son déplacement.
 // Réglages : src/config/site.ts → background.
 
 type Step = keyof typeof site.background.scenes;
 const ORDER: Step[] = ["accueil", "boutique", "produit", "panier", "commande", "merci"];
 const scenes = site.background.scenes;
-// La boucle d'attente commence sur la dernière image de la vidéo de l'étape :
+// La vidéo d'attente commence sur la dernière image de la vidéo de l'étape :
 // elle prend le relais en fondu pendant les 0,35 dernières secondes.
 const IDLE_LEAD = 0.35;
 
@@ -45,7 +46,7 @@ export default function StationBackground() {
   const clear = done || step === "panier" || leaving; // vidéo bien nette, sans voile
   const headerShown = !open && !ordered; // l'en-tête est visible : le décor commence sous lui
 
-  const [idle, setIdle] = useState<Step | null>(null); // boucle d'attente affichée
+  const [idle, setIdle] = useState<Step | null>(null); // vidéo d'attente affichée
   const [move, setMove] = useState<Move | null>(null); // déplacement en cours
   const [moveOn, setMoveOn] = useState(false); // le déplacement est-il visible ?
   const [still, setStill] = useState<string>(site.background.debut); // image de secours
@@ -80,7 +81,7 @@ export default function StationBackground() {
     }
   };
 
-  // La vidéo de déplacement a démarré : on place la boucle d'attente de la même étape
+  // La vidéo de déplacement a démarré : on place la vidéo d'attente de la même étape
   // derrière elle (en pause au début), pour qu'elle soit chargée au moment du relais.
   const onMovePlaying = () => {
     setMoveOn(true);
@@ -92,7 +93,7 @@ export default function StationBackground() {
     if (v && move && move.from < 0) v.currentTime = Math.max(0, v.duration + move.from);
   };
 
-  // Relais : un peu avant la fin du déplacement, la boucle d'attente prend le relais
+  // Relais : un peu avant la fin du déplacement, la vidéo d'attente prend le relais
   const onMoveTime = () => {
     const v = moveRef.current;
     if (!v || !move || swapped.current || !v.duration) return;
@@ -110,7 +111,7 @@ export default function StationBackground() {
     setTimeout(() => setMove((m) => (m && m.key === move?.key ? null : m)), 400);
   };
 
-  // si la boucle change de source pendant le relais, on la relance au début
+  // si la vidéo d'attente change de source pendant le relais, on la relance au début
   useEffect(() => {
     const i = idleRef.current;
     if (i && swapped.current) { i.currentTime = 0; i.play().catch(() => {}); }
@@ -126,19 +127,19 @@ export default function StationBackground() {
       <div className={`bg-stage absolute inset-0${step === "panier" ? " cart-open" : ""}`} style={{ top: headerShown ? "var(--header-h, 0px)" : 0 }}>
         {/* image de secours (chargement, mouvements réduits) */}
         <img src={still} alt="" className="bg-media absolute inset-0 h-full w-full object-cover" />
-        {/* le docteur qui attend : boucle aller-retour, sans couture */}
-        {idleScene && (
+        {/* le docteur qui attend : sa vidéo d'attente jouée une fois, puis il reste immobile
+            sur la dernière image (pas de boucle, pas d'aller-retour) */}
+        {idleScene?.attente && (
           <video
             ref={idleRef}
             key={idleScene.attente}
             src={idleScene.attente}
             poster={idleScene.fin}
             muted
-            loop
             playsInline
             preload="auto"
             autoPlay={!move}
-            className="bg-media idle-drift absolute inset-0 h-full w-full object-cover"
+            className="bg-media absolute inset-0 h-full w-full object-cover"
           />
         )}
         {/* le déplacement du docteur vers l'étape */}
