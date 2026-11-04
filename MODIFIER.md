@@ -60,7 +60,7 @@ price: 1990,   →   price: 2490,
 
 ## Règle importante pour les textes
 
-N'écris pas de promesse santé non autorisée (« fait maigrir », « soigne »…). Pour les compléments alimentaires, seules les allégations de la liste officielle de l'UE sont permises. Pour les cosmétiques, chaque bénéfice doit pouvoir être prouvé (tests). Pour Lunaria Balance, n'utilise que les allégations officielles du magnésium (ex. « contribue à réduire la fatigue »).
+N'écris pas de promesse santé non autorisée (« fait maigrir », « soigne »…). Pour les compléments alimentaires, seules les allégations de la liste officielle de l'UE sont permises. Pour les cosmétiques, chaque bénéfice doit pouvoir être prouvé (tests). Si tu ajoutes un complément alimentaire, n'utilise que les allégations officielles de ses ingrédients (ex. pour le magnésium : « contribue à réduire la fatigue »).
 
 ## Si quelque chose casse
 

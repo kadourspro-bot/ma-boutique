@@ -19,6 +19,8 @@ export default function Boutique() {
   return (
     <div className="max-w-6xl mx-auto px-4 py-10">
       <h1 className="font-display text-4xl font-light title-gradient">Boutique</h1>
+      {/* recherche, tri et catégories : seulement s'il y a plusieurs produits */}
+      {products.length > 1 && (<>
       <div className="mt-6 flex flex-col sm:flex-row gap-3">
         <label className="flex-1"><span className="sr-only">Rechercher</span>
           <input type="search" value={q} onChange={(e) => setQ(e.target.value)} placeholder="Rechercher un produit…" className="w-full rounded-full border border-silver/20 bg-night/60 px-4 py-2.5 placeholder:text-white/40 focus:border-brand outline-none" />
@@ -35,7 +37,8 @@ export default function Boutique() {
         ))}
       </div>
       <p className="mt-4 text-sm text-white/60">{list.length} produit(s)</p>
-      <div className="mt-4 grid gap-4 grid-cols-2 lg:grid-cols-3">{list.map((p) => <ProductCard key={p.slug} p={p} />)}</div>
+      </>)}
+      <div className={`mt-4 grid gap-4 ${products.length > 1 ? "grid-cols-2 lg:grid-cols-3" : "mt-10 max-w-sm grid-cols-1"}`}>{list.map((p) => <ProductCard key={p.slug} p={p} />)}</div>
     </div>
   );
 }

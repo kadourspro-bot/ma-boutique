@@ -28,7 +28,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <CartProvider>
         <PageTransitionProvider>
           <StationBackground />
-          <UiFader><Header /></UiFader>
+          <UiFader className="sticky top-0 z-30"><Header /></UiFader>
           <UiFader onlyCart><main><PageContent>{children}</PageContent></main></UiFader>
           <CartDrawer />
           <UiFader><footer className="mt-32 border-t border-silver/10 bg-night/60 backdrop-blur">

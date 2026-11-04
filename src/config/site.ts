@@ -52,7 +52,7 @@ export const site = {
   },
 
   // --- Bandeau tout en haut ---
-  announcement: "Livraison offerte dès 60 € · Échantillon Lunaria Nuit offert",
+  announcement: "Livraison offerte dès 60 € · Paiement sécurisé",
 
   // --- Livraison (montants en centimes : 6000 = 60,00 €) ---
   freeShippingThreshold: 6000,
@@ -75,9 +75,9 @@ export const site = {
     title: "Trois gestes, une nouvelle orbite.",
     image: "/images/labo.jpg",
     steps: [
-      { title: "Éveiller", text: "Le matin, quelques gouttes de Lunaria Éclat sur peau propre pour un teint frais et lumineux." },
-      { title: "Illuminer", text: "Une touche de Lunaria Glow sur les pommettes et les épaules pour un fini nacré." },
-      { title: "Régénérer", text: "Le soir, Lunaria Nuit en massage lent : un moment pour soi avant de rejoindre les étoiles." },
+      { title: "Préparer", text: "Le matin, nettoyez le visage et séchez-le en tamponnant doucement." },
+      { title: "Éveiller", text: "Déposez 3 à 4 gouttes de Lunaria Éclat au creux de la main, puis lissez-les du centre du visage vers l'extérieur." },
+      { title: "Illuminer", text: "Laissez pénétrer quelques secondes, puis appliquez votre crème habituelle : le teint est frais et lumineux." },
     ],
   },
 
@@ -93,7 +93,7 @@ export const site = {
   },
 
   faq: [
-    ["Comment utiliser les produits Lunaria ?", "Chaque fiche produit détaille son rituel. Éclat et Glow s'utilisent le matin, Nuit le soir, Balance au quotidien."],
+    ["Comment utiliser Lunaria Éclat ?", "Le matin, 3 à 4 gouttes sur le visage propre, puis votre crème habituelle. Le rituel complet est détaillé sur la fiche produit."],
     ["D'où viennent les ingrédients ?", "Nos formules associent des actifs botaniques sélectionnés et des ingrédients d'origine naturelle. La liste complète (INCI) figure sur chaque fiche produit."],
     ["Quels sont les délais de livraison ?", "Expédition sous 24 h ouvrées, livraison en 2 à 3 jours en France."],
     ["Puis-je retourner un produit ?", "Oui, vous disposez de 14 jours après réception pour un produit non ouvert."],

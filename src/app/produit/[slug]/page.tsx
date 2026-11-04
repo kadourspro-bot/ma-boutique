@@ -46,8 +46,10 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
           <ul className="mt-6 flex flex-wrap gap-x-5 gap-y-1 text-sm text-ivory/55">{site.reassurance.map((r) => <li key={r}>✦ {r}</li>)}</ul>
         </div>
       </div>
-      <h2 className="mt-24 font-display text-2xl font-light">Prolongez le rituel</h2>
-      <div className="mt-6 grid grid-cols-2 gap-4 lg:grid-cols-3">{related.map((r) => <ProductCard key={r.slug} p={r} />)}</div>
+      {related.length > 0 && (<>
+        <h2 className="mt-24 font-display text-2xl font-light">Prolongez le rituel</h2>
+        <div className="mt-6 grid grid-cols-2 gap-4 lg:grid-cols-3">{related.map((r) => <ProductCard key={r.slug} p={r} />)}</div>
+      </>)}
     </div>
   );
 }
