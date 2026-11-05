@@ -13,7 +13,7 @@ export default function Hero() {
             <p className="kicker animate-fade-up">{hero.kicker}</p>
             <div className="mt-6 flex items-center gap-4 animate-fade-up delay-1">
               <LogoIcon className="h-12 w-12" />
-              <span className="font-display text-2xl tracking-[0.45em] text-silver">LUNARIA</span>
+              <span className="font-display text-2xl uppercase tracking-[0.45em] text-silver">{site.name}</span>
             </div>
             <h1 className="mt-6 font-display text-5xl font-light leading-[1.05] sm:text-7xl title-gradient animate-fade-up delay-2 drop-shadow-[0_4px_30px_rgba(17,21,43,.8)]">{hero.title}</h1>
             <p className="mt-6 max-w-md text-lg text-ivory/85 animate-fade-up delay-3">{hero.subtitle}</p>

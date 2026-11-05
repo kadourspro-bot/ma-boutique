@@ -6,7 +6,7 @@
 
 export const site = {
   // --- Marque ---
-  name: "LUNARIA",
+  name: "Lunaria", // s'affiche en capitales dans le logo
   signature: "Votre beauté, nouvelle orbite.",
   description: "Lunaria explore les rituels de beauté du futur, imaginés dans un laboratoire en orbite.",
 

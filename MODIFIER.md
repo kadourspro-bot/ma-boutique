@@ -1,5 +1,7 @@
 # Comment modifier ton site
 
+Le guide complet, partie par partie (où se trouve chaque texte, chaque réglage et chaque vidéo) : https://claude.ai/artifact/RteawEqxGhh4M3cdoJyBNW
+
 Tu n'as besoin que de **deux fichiers**. Tu peux les modifier directement sur GitHub, sans rien installer.
 
 | Ce que tu veux changer | Fichier |
@@ -18,9 +20,9 @@ Tu n'as besoin que de **deux fichiers**. Tu peux les modifier directement sur Gi
 
 ## Exemples
 
-**Changer le nom de la marque :**
+**Changer le nom de la marque** (logo, onglet du navigateur, bas de page) :
 ```ts
-name: "PureForme",   →   name: "MonNouveauNom",
+name: "Lunaria",   →   name: "MonNouveauNom",
 ```
 
 **Changer les couleurs** (palette Lunaria, dans `site.ts`) :
@@ -62,6 +64,10 @@ price: 1990,   →   price: 2490,
 
 N'écris pas de promesse santé non autorisée (« fait maigrir », « soigne »…). Pour les compléments alimentaires, seules les allégations de la liste officielle de l'UE sont permises. Pour les cosmétiques, chaque bénéfice doit pouvoir être prouvé (tests). Si tu ajoutes un complément alimentaire, n'utilise que les allégations officielles de ses ingrédients (ex. pour le magnésium : « contribue à réduire la fatigue »).
 
+## Attention aux apostrophes dans les fichiers .tsx
+
+Dans `site.ts` et `products.ts`, écris normalement. Dans un fichier `.tsx`, une apostrophe droite `'` dans un texte bloque la mise en ligne : utilise l'apostrophe typographique ’ ou écris `&apos;`.
+
 ## Si quelque chose casse
 
-Sur GitHub, ouvre l'onglet **Commits**, retrouve ta dernière modification et clique sur **Revert**. Tu peux aussi me le dire et je corrige.
+Sur GitHub, ouvre le fichier puis **History** : tu y retrouves chaque ancienne version et tu peux recopier celle qui marchait. Tu peux aussi me le dire et je corrige.

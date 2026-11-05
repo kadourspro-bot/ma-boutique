@@ -15,7 +15,7 @@ const inter = Inter({ variable: "--font-inter", subsets: ["latin"] });
 const jost = Jost({ variable: "--font-jost", subsets: ["latin"], weight: ["300", "400", "500"] });
 
 export const metadata: Metadata = {
-  title: { default: `Lunaria · ${site.signature}`, template: "%s · Lunaria" },
+  title: { default: `${site.name} · ${site.signature}`, template: `%s · ${site.name}` },
   description: site.description,
 };
 
@@ -46,7 +46,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
                 <li><Link href="/mentions-legales#retours" className="hover:text-lilac">Retours (14 jours)</Link></li>
               </ul>
             </div>
-            <p className="pb-8 text-center text-xs text-ivory/35">© {new Date().getFullYear()} Lunaria · {site.company.legalName}</p>
+            <p className="pb-8 text-center text-xs text-ivory/35">© {new Date().getFullYear()} {site.name} · {site.company.legalName}</p>
           </footer></UiFader>
         </PageTransitionProvider>
         </CartProvider>

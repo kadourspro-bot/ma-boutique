@@ -1,4 +1,7 @@
-// Logo Lunaria : croissant de lune + orbite + étoile. Fichiers vectoriels dans public/brand/
+// Logo : croissant de lune + orbite + étoile. Le nom et la signature viennent de src/config/site.ts
+// Fichiers vectoriels du logo dans public/brand/
+import { site } from "@/config/site";
+
 export function LogoIcon({ className = "h-8 w-8", moon = "var(--silver)" }: { className?: string; moon?: string }) {
   return (
     <svg viewBox="0 0 64 64" fill="none" className={className} aria-hidden>
@@ -15,8 +18,8 @@ export default function Logo({ withSignature = false, size = "md" }: { withSigna
     <span className="inline-flex items-center gap-3">
       <LogoIcon className={lg ? "h-14 w-14" : "h-8 w-8"} />
       <span className="flex flex-col leading-none">
-        <span className={`font-display font-normal text-silver ${lg ? "text-3xl tracking-[0.4em]" : "text-lg tracking-[0.35em]"}`}>LUNARIA</span>
-        {withSignature && <span className="mt-1.5 font-display text-[10px] tracking-[0.25em] uppercase text-silver/70">Votre beauté, nouvelle orbite</span>}
+        <span className={`font-display font-normal uppercase text-silver ${lg ? "text-3xl tracking-[0.4em]" : "text-lg tracking-[0.35em]"}`}>{site.name}</span>
+        {withSignature && <span className="mt-1.5 font-display text-[10px] tracking-[0.25em] uppercase text-silver/70">{site.signature.replace(/\.$/, "")}</span>}
       </span>
     </span>
   );
