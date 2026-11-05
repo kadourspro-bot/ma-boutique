@@ -32,7 +32,7 @@ export default function Home() {
       {/* 3. Le rituel */}
       <section id="rituel" className="mx-auto mt-32 grid max-w-6xl scroll-mt-28 items-center gap-10 px-4 md:grid-cols-2">
         <div className="glass relative aspect-[4/3] overflow-hidden rounded-[2rem]">
-          <Visual src={ritual.image} alt="Fioles et botaniques sous cloche dans le laboratoire Lunaria" fallback={
+          <Visual src={ritual.image} alt={`Fioles et botaniques sous cloche dans le laboratoire ${site.name}`} fallback={
             <div className="absolute inset-0 grid place-items-center" style={{ background: "radial-gradient(circle at 50% 70%, rgb(183 161 232 / .35), transparent 60%)" }}>
               <div className="flex items-end gap-6">{products.slice(0, 3).map((p, i) => <img key={p.slug} src={p.image} alt="" className={`w-28 animate-float ${i === 1 || products.length === 1 ? "w-36" : ""}`} style={{ animationDelay: `${i * 0.8}s` }} />)}</div>
             </div>} />

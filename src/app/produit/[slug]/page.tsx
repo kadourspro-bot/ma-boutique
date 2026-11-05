@@ -17,7 +17,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
   if (!p) notFound();
   const related = products.filter((x) => x.slug !== p.slug).slice(0, 3);
   const jsonLd = {
-    "@context": "https://schema.org", "@type": "Product", name: p.name, description: p.short, image: p.image, brand: { "@type": "Brand", name: "Lunaria" },
+    "@context": "https://schema.org", "@type": "Product", name: p.name, description: p.short, image: p.image, brand: { "@type": "Brand", name: site.name },
     offers: { "@type": "Offer", priceCurrency: "EUR", price: (p.price / 100).toFixed(2), availability: p.stock > 0 ? "https://schema.org/InStock" : "https://schema.org/OutOfStock" },
   };
   return (
