@@ -25,7 +25,7 @@ export default function Header() {
         <Link href="/" aria-label={`${site.name}, accueil`}><Logo /></Link>
         <div className="flex items-center gap-6 text-sm">
           <Link href="/#collection" className="hidden hover:text-lilac sm:inline">Collection</Link>
-          <Link href="/#rituel" className="hidden hover:text-lilac md:inline">Rituel</Link>
+          <Link href="/#rituel" className="hidden hover:text-lilac md:inline">Méthode</Link>
           <Link href="/#univers" className="hidden hover:text-lilac md:inline">Univers</Link>
           <Link href="/#faq" className="hidden hover:text-lilac lg:inline">FAQ</Link>
           <button onClick={() => setOpen(true)} className="btn-ghost rounded-full px-4 py-2" aria-label={`Ouvrir le panier, ${count} article(s)`}>
