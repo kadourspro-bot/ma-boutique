@@ -17,4 +17,4 @@ Tout est expliqué pas à pas dans [MODIFIER.md](MODIFIER.md). En bref : les ré
 - Remplacer les produits et la marque d'exemple
 - Brancher le paiement
 - Rédiger mentions légales et CGV (`src/app/mentions-legales/page.tsx`)
-- Mettre en ligne sur Vercel
+- Mettre en ligne sur Vercel (puis régler le mot de passe `SITE_PASSWORD`, voir MODIFIER.md)
