@@ -68,6 +68,20 @@ N'écris pas de promesse santé non autorisée (« fait maigrir », « soigne »
 
 Dans `site.ts` et `products.ts`, écris normalement. Dans un fichier `.tsx`, une apostrophe droite `'` dans un texte bloque la mise en ligne : utilise l'apostrophe typographique ’ ou écris `&apos;`.
 
+## Site sur invitation (mot de passe)
+
+Une fois en ligne, le site peut être réservé aux personnes à qui tu donnes un mot de passe. Les autres voient seulement une page « Accès sur invitation ». Une personne qui a entré le bon mot de passe n’a plus à le retaper pendant 30 jours sur ce téléphone ou cet ordinateur.
+
+Le mot de passe ne s’écrit **pas** dans le code (le dépôt GitHub est public, tout le monde pourrait le lire). Il se règle sur Vercel :
+
+1. Sur vercel.com, ouvre ton projet → **Settings** → **Environment Variables**.
+2. **Key** : `SITE_PASSWORD` · **Value** : ton mot de passe (exemple : `orion2026`) → **Save**.
+3. Onglet **Deployments** → sur la dernière ligne, les trois points **⋯** → **Redeploy**.
+
+- **Plusieurs personnes, un code chacune :** sépare les codes par des virgules, par exemple `marie-lune,karim-orbite,orion2026`. Pour retirer l’accès à quelqu’un, enlève son code puis refais **Redeploy**.
+- **Ouvrir le site à tout le monde :** supprime la variable `SITE_PASSWORD` puis **Redeploy**.
+- Sur ton ordinateur (`npm run dev`), il n’y a pas de mot de passe tant que la variable n’existe pas.
+
 ## Si quelque chose casse
 
 Sur GitHub, ouvre le fichier puis **History** : tu y retrouves chaque ancienne version et tu peux recopier celle qui marchait. Tu peux aussi me le dire et je corrige.
